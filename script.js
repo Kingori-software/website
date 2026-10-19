@@ -6,8 +6,7 @@
 
 
 /* 1. CLUB PHOTO SLIDESHOW
-   Add or replace photo URLs in this list.
-   The slideshow duplicates the photos for a continuous loop.
+   Replace these sample URLs with your preferred club photos.
    ========================================================= */
 
 const galleryImages = [
@@ -17,23 +16,22 @@ const galleryImages = [
     },
     {
         src: "https://i.ibb.co/7cDk3cy/IMG-20261018-WA0055.jpg",
-        alt: "Rotaract Club community activity"
+        alt: "Rotaract Club members at a community activity"
     },
     {
         src: "https://i.ibb.co/JRdwnj72/IMG-20261014-WA0003-1.jpg",
-        alt: "Rotaract Club fellowship"
+        alt: "Rotaractors participating in club activities"
     },
     {
         src: "https://i.ibb.co/7cDk3cy/IMG-20261018-WA0055.jpg",
-        alt: "Rotaractors working together"
+        alt: "Rotaract fellowship and memories"
     }
 ];
 
 
 /* 2. BOARD MEMBERS
-   Add up to six board members here.
-   Replace the example details with real information.
-   Use public image URLs for profile pictures.
+   Add up to six real board members.
+   Use direct, publicly accessible image URLs.
    ========================================================= */
 
 const boardMembers = [
@@ -41,21 +39,21 @@ const boardMembers = [
     {
         name: "Portia Gatihi",
         position: "Club President",
-        description: "Leading the club with purpose, teamwork and service.",
+        description: "Leading our club through service, teamwork and fellowship.",
         image: "https://example.com/president-photo.jpg"
     },
     {
         name: "Your Name",
         position: "PR & Image Director",
-        description: "Sharing our story and highlighting the impact of our club.",
+        description: "Sharing our story and showcasing the impact of our club.",
         image: "https://example.com/your-photo.jpg"
     }
     */
 ];
 
 
-/* 3. CLUB EVENTS
-   Update the details below whenever new events are announced.
+/* 3. UPCOMING EVENTS
+   Check the dates and descriptions before publishing.
    ========================================================= */
 
 const events = [
@@ -66,7 +64,7 @@ const events = [
         month: "OCT",
         time: "6 PM",
         description:
-            "Get ready for an evening of fun, games and fellowship with fellow Rotaractors. Come connect, make memories and enjoy the experience together."
+            "Enjoy an evening of games, friendship and fellowship with fellow Rotaractors. Come connect, make memories and have fun together."
     },
     {
         image: "https://i.ibb.co/7cDk3cy/IMG-20261018-WA0055.jpg",
@@ -80,13 +78,47 @@ const events = [
 ];
 
 
-/* 4. FOOTER: CURRENT YEAR AND LAST UPDATED DATE
-   Uses East African Time for the displayed date.
+/* 4. GENERAL HELPERS
+   ========================================================= */
+
+function createElement(tag, className, textContent) {
+    const element = document.createElement(tag);
+
+    if (className) {
+        element.className = className;
+    }
+
+    if (textContent !== undefined) {
+        element.textContent = textContent;
+    }
+
+    return element;
+}
+
+
+function createImage(src, alt, className) {
+    const image = document.createElement("img");
+
+    image.src = src;
+    image.alt = alt || "Rotaract Club photo";
+    image.className = className || "";
+    image.loading = "lazy";
+    image.decoding = "async";
+
+    image.addEventListener("error", function () {
+        image.classList.add("image-unavailable");
+    });
+
+    return image;
+}
+
+
+/* 5. FOOTER DATE AND YEAR
    ========================================================= */
 
 function updateFooter() {
     const yearElement = document.getElementById("current-year");
-    const updatedElement = document.getElementById("last-updated");
+    const dateElement = document.getElementById("last-updated");
 
     const now = new Date();
 
@@ -94,8 +126,8 @@ function updateFooter() {
         yearElement.textContent = now.getFullYear();
     }
 
-    if (updatedElement) {
-        updatedElement.textContent = new Intl.DateTimeFormat("en-KE", {
+    if (dateElement) {
+        dateElement.textContent = new Intl.DateTimeFormat("en-KE", {
             day: "numeric",
             month: "long",
             year: "numeric",
@@ -105,30 +137,104 @@ function updateFooter() {
 }
 
 
-/* 5. IMAGE HELPER
-   Creates images safely and handles unavailable images.
+/* 6. FULL-SIZE IMAGE VIEWER
+   Clicking gallery or event images opens the full image.
    ========================================================= */
 
-function createImageCard(src, alt, className) {
-    const image = document.createElement("img");
+function setupLightbox() {
+    const lightbox = document.getElementById("image-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const closeButton = document.getElementById("lightbox-close");
+    const backdropButton = document.getElementById("lightbox-backdrop");
 
-    image.src = src;
-    image.alt = alt;
-    image.className = className || "";
-    image.loading = "lazy";
-    image.decoding = "async";
+    if (
+        !lightbox ||
+        !lightboxImage ||
+        !closeButton ||
+        !backdropButton
+    ) {
+        return;
+    }
 
-    image.addEventListener("error", function () {
-        image.classList.add("image-unavailable");
-        image.alt = "Image temporarily unavailable";
+    let previousFocus = null;
+
+    function openLightbox(src, alt) {
+        previousFocus = document.activeElement;
+
+        lightboxImage.src = src;
+        lightboxImage.alt = alt || "Full-size club photo";
+
+        if (lightboxCaption) {
+            lightboxCaption.textContent = alt || "";
+        }
+
+        lightbox.hidden = false;
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+
+        closeButton.focus();
+    }
+
+    function closeLightbox() {
+        if (lightbox.hidden) return;
+
+        lightbox.hidden = true;
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+
+        lightboxImage.src = "";
+        lightboxImage.alt = "";
+
+        if (lightboxCaption) {
+            lightboxCaption.textContent = "";
+        }
+
+        if (previousFocus && typeof previousFocus.focus === "function") {
+            previousFocus.focus();
+        }
+    }
+
+    // Event delegation also works for images created later by JavaScript.
+    document.addEventListener("click", function (event) {
+        const image = event.target.closest(
+            ".gallery-image, .event-image, .member-photo"
+        );
+
+        if (!image || image.classList.contains("image-unavailable")) {
+            return;
+        }
+
+        event.preventDefault();
+
+        openLightbox(
+            image.currentSrc || image.src,
+            image.alt
+        );
     });
 
-    return image;
+    closeButton.addEventListener("click", closeLightbox);
+    backdropButton.addEventListener("click", closeLightbox);
+
+    document.addEventListener("keydown", function (event) {
+        if (lightbox.hidden) return;
+
+        if (event.key === "Escape") {
+            closeLightbox();
+        }
+
+        // Keep keyboard focus within the open viewer.
+        if (event.key === "Tab") {
+            event.preventDefault();
+            closeButton.focus();
+        }
+    });
 }
 
 
-/* 6. DISPLAY THE AUTOMATIC PHOTO SLIDESHOW
-   The second copy makes the horizontal animation loop smoothly.
+/* 7. CLUB PHOTO SLIDESHOW
+   Duplicate the images to create a continuous scrolling track.
+   CSS will control the speed and direction of movement.
    ========================================================= */
 
 function displayGallery() {
@@ -139,40 +245,51 @@ function displayGallery() {
     track.replaceChildren();
 
     if (galleryImages.length === 0) {
-        const message = document.createElement("p");
-        message.textContent = "Club photos will appear here soon.";
-        track.appendChild(message);
+        track.appendChild(
+            createElement("p", "gallery-empty", "Club photos coming soon.")
+        );
         return;
     }
 
-    const allImages = [
+    // Two copies allow the animation to loop continuously.
+    const imagesForTrack = [
         ...galleryImages,
         ...galleryImages
     ];
 
-    allImages.forEach(function (photo, index) {
-        const photoCard = document.createElement("div");
-        photoCard.className = "gallery-photo";
+    imagesForTrack.forEach(function (photo, index) {
+        const card = createElement("div", "gallery-photo");
 
-        // Mark duplicated images as decorative for screen readers.
+        // Mark the duplicate set as decorative for screen readers.
         if (index >= galleryImages.length) {
-            photoCard.setAttribute("aria-hidden", "true");
+            card.setAttribute("aria-hidden", "true");
         }
 
-        const image = createImageCard(
+        const image = createImage(
             photo.src,
             photo.alt,
             "gallery-image"
         );
 
-        photoCard.appendChild(image);
-        track.appendChild(photoCard);
+        image.tabIndex = 0;
+        image.setAttribute("role", "button");
+        image.setAttribute("aria-label", "View full image: " + photo.alt);
+
+        image.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                image.click();
+            }
+        });
+
+        card.appendChild(image);
+        track.appendChild(card);
     });
 }
 
 
-/* 7. DISPLAY EVENTS
-   Builds the event cards using the information above.
+/* 8. UPCOMING EVENTS
+   Wider cards and clickable full-size photos.
    ========================================================= */
 
 function displayEvents() {
@@ -183,53 +300,73 @@ function displayEvents() {
     container.replaceChildren();
 
     if (events.length === 0) {
-        const message = document.createElement("p");
-        message.textContent = "New club events will be announced soon.";
-        container.appendChild(message);
+        container.appendChild(
+            createElement(
+                "p",
+                "events-empty",
+                "New club events will be announced soon."
+            )
+        );
         return;
     }
 
     events.forEach(function (event) {
-        const card = document.createElement("article");
-        card.className = "event-card reveal";
+        const card = createElement("article", "event-card");
 
-        const imageWrapper = document.createElement("div");
-        imageWrapper.className = "event-image-wrapper";
+        const imageWrapper = createElement("div", "event-image-wrapper");
 
-        const image = createImageCard(
+        const image = createImage(
             event.image,
-            event.name,
+            event.name + " — View full image",
             "event-image"
         );
 
-        const dateBadge = document.createElement("div");
-        dateBadge.className = "event-date";
+        image.tabIndex = 0;
+        image.setAttribute("role", "button");
+        image.setAttribute("aria-label", "View full event image: " + event.name);
 
-        const dateNumber = document.createElement("span");
-        dateNumber.className = "event-date-number";
-        dateNumber.textContent = event.date;
+        image.addEventListener("keydown", function (keyboardEvent) {
+            if (
+                keyboardEvent.key === "Enter" ||
+                keyboardEvent.key === " "
+            ) {
+                keyboardEvent.preventDefault();
+                image.click();
+            }
+        });
 
-        const dateMonth = document.createElement("span");
-        dateMonth.className = "event-date-month";
-        dateMonth.textContent = event.month;
+        const dateBadge = createElement("div", "event-date");
 
-        dateBadge.append(dateNumber, dateMonth);
+        const day = createElement(
+            "span",
+            "event-date-number",
+            event.date
+        );
+
+        const month = createElement(
+            "span",
+            "event-date-month",
+            event.month
+        );
+
+        dateBadge.append(day, month);
         imageWrapper.append(image, dateBadge);
 
-        const content = document.createElement("div");
-        content.className = "event-content";
+        const content = createElement("div", "event-content");
 
-        const title = document.createElement("h3");
-        title.className = "event-title";
-        title.textContent = event.name;
+        const title = createElement("h3", "event-title", event.name);
 
-        const time = document.createElement("p");
-        time.className = "event-time";
-        time.textContent = "🕒 " + event.time;
+        const time = createElement(
+            "p",
+            "event-time",
+            "Time: " + event.time
+        );
 
-        const description = document.createElement("p");
-        description.className = "event-description";
-        description.textContent = event.description;
+        const description = createElement(
+            "p",
+            "event-description",
+            event.description
+        );
 
         content.append(title, time, description);
         card.append(imageWrapper, content);
@@ -238,10 +375,8 @@ function displayEvents() {
 }
 
 
-/* 8. BOARD MEMBER STORAGE
-   Board edits are saved in this browser using localStorage.
-   Important: these changes do not automatically update the
-   website for other visitors or devices.
+/* 9. BOARD MEMBER DATA
+   Browser-based edits are local to that browser only.
    ========================================================= */
 
 const BOARD_STORAGE_KEY = "rotaractBoardMembers";
@@ -258,11 +393,12 @@ function getSavedBoardMembers() {
             }
         }
     } catch (error) {
-        console.warn("Could not load saved board members:", error);
+        console.warn("Unable to load saved board members.", error);
     }
 
     return boardMembers.slice(0, 6);
 }
+
 
 function saveBoardMembers(members) {
     try {
@@ -273,14 +409,14 @@ function saveBoardMembers(members) {
 
         return true;
     } catch (error) {
-        console.error("Could not save board members:", error);
+        console.error("Unable to save board members.", error);
         return false;
     }
 }
 
 
-/* 9. RENDER BOARD MEMBER CARDS
-   Displays a maximum of six board members.
+/* 10. DISPLAY BOARD MEMBERS
+   Maximum of six profile cards.
    ========================================================= */
 
 function renderBoard() {
@@ -293,63 +429,78 @@ function renderBoard() {
     const members = getSavedBoardMembers().slice(0, 6);
 
     if (members.length === 0) {
-        const emptyMessage = document.createElement("p");
-        emptyMessage.className = "board-empty";
-        emptyMessage.textContent =
-            "Our board profiles are coming soon. Meet the people helping our club grow!";
-
-        grid.appendChild(emptyMessage);
+        grid.appendChild(
+            createElement(
+                "p",
+                "board-empty",
+                "Our board profiles are coming soon. Meet the people helping our club grow!"
+            )
+        );
         return;
     }
 
     members.forEach(function (member) {
-        const card = document.createElement("article");
-        card.className = "member-card";
-
-        const photoWrapper = document.createElement("div");
-        photoWrapper.className = "member-photo-wrap";
+        const card = createElement("article", "member-card");
+        const photoWrapper = createElement("div", "member-photo-wrap");
 
         if (member.image) {
-            const image = createImageCard(
+            const image = createImage(
                 member.image,
                 member.name + " — " + member.position,
                 "member-photo"
             );
 
+            image.tabIndex = 0;
+            image.setAttribute("role", "button");
+            image.setAttribute("aria-label", "View full photo of " + member.name);
+
             image.addEventListener("error", function () {
-                const placeholder = document.createElement("div");
-                placeholder.className = "member-placeholder";
-                placeholder.textContent =
-                    (member.name || "?").trim().charAt(0).toUpperCase();
+                const placeholder = createElement(
+                    "div",
+                    "member-placeholder",
+                    (member.name || "?").trim().charAt(0).toUpperCase()
+                );
 
                 photoWrapper.replaceChildren(placeholder);
             });
 
+            image.addEventListener("keydown", function (event) {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    image.click();
+                }
+            });
+
             photoWrapper.appendChild(image);
         } else {
-            const placeholder = document.createElement("div");
-            placeholder.className = "member-placeholder";
-            placeholder.textContent =
-                (member.name || "?").trim().charAt(0).toUpperCase();
-
-            photoWrapper.appendChild(placeholder);
+            photoWrapper.appendChild(
+                createElement(
+                    "div",
+                    "member-placeholder",
+                    (member.name || "?").trim().charAt(0).toUpperCase()
+                )
+            );
         }
 
-        const info = document.createElement("div");
-        info.className = "member-info";
+        const info = createElement("div", "member-info");
 
-        const name = document.createElement("h3");
-        name.className = "member-name";
-        name.textContent = member.name || "Board Member";
+        const name = createElement(
+            "h3",
+            "member-name",
+            member.name || "Board Member"
+        );
 
-        const position = document.createElement("p");
-        position.className = "member-position";
-        position.textContent = member.position || "Club Board";
+        const position = createElement(
+            "p",
+            "member-position",
+            member.position || "Club Board"
+        );
 
-        const description = document.createElement("p");
-        description.className = "member-description";
-        description.textContent =
-            member.description || "Serving through leadership and fellowship.";
+        const description = createElement(
+            "p",
+            "member-description",
+            member.description || "Serving through leadership and fellowship."
+        );
 
         info.append(name, position, description);
         card.append(photoWrapper, info);
@@ -358,7 +509,7 @@ function renderBoard() {
 }
 
 
-/* 10. EXPAND AND COLLAPSE THE BOARD SECTION
+/* 11. EXPAND / COLLAPSE BOARD MEMBERS
    ========================================================= */
 
 function setupBoardToggle() {
@@ -371,60 +522,67 @@ function setupBoardToggle() {
     content.hidden = true;
 
     toggle.addEventListener("click", function () {
-        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
-        const shouldExpand = !isExpanded;
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        const nextState = !expanded;
 
-        toggle.setAttribute("aria-expanded", String(shouldExpand));
-        content.hidden = !shouldExpand;
+        toggle.setAttribute("aria-expanded", String(nextState));
+        content.hidden = !nextState;
 
         const label = toggle.querySelector(".toggle-label");
         const symbol = toggle.querySelector(".toggle-symbol");
 
         if (label) {
-            label.textContent = shouldExpand
+            label.textContent = nextState
                 ? "Hide Board Members"
                 : "See Board Members";
         }
 
         if (symbol) {
-            symbol.textContent = shouldExpand ? "−" : "+";
+            symbol.textContent = nextState ? "−" : "+";
         }
 
-        if (shouldExpand) {
+        if (nextState) {
             renderBoard();
         }
     });
 }
 
 
-/* 11. BOARD MEMBER EDITOR
-   Allows a person using this browser to add/edit up to six cards.
+/* 12. BOARD EDITOR
+   Adds profiles to local browser storage.
    ========================================================= */
 
 function setupBoardEditor() {
-    const editorToggle = document.getElementById("editor-toggle");
-    const editorPanel = document.getElementById("board-editor-panel");
+    const toggle = document.getElementById("editor-toggle");
+    const panel = document.getElementById("board-editor-panel");
     const form = document.getElementById("board-member-form");
     const cancelButton = document.getElementById("cancel-edit");
     const imageInput = document.getElementById("member-image");
     const message = document.getElementById("form-message");
 
-    if (!editorToggle || !editorPanel || !form) return;
+    if (!toggle || !panel || !form) return;
 
     let selectedImage = "";
 
-    editorPanel.hidden = true;
+    panel.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
 
-    editorToggle.addEventListener("click", function () {
-        editorPanel.hidden = !editorPanel.hidden;
+    function showMessage(text, isError) {
+        if (!message) return;
 
-        editorToggle.setAttribute(
-            "aria-expanded",
-            String(!editorPanel.hidden)
-        );
+        message.textContent = text;
+        message.classList.toggle("error", Boolean(isError));
+        message.classList.toggle("success", Boolean(text) && !isError);
+    }
 
-        if (!editorPanel.hidden) {
-            editorPanel.scrollIntoView({
+    toggle.addEventListener("click", function () {
+        const open = panel.hidden;
+
+        panel.hidden = !open;
+        toggle.setAttribute("aria-expanded", String(open));
+
+        if (open) {
+            panel.scrollIntoView({
                 behavior: "smooth",
                 block: "nearest"
             });
@@ -435,29 +593,22 @@ function setupBoardEditor() {
         imageInput.addEventListener("change", function () {
             const file = imageInput.files && imageInput.files[0];
 
-            if (!file) {
-                selectedImage = "";
-                return;
-            }
+            selectedImage = "";
+
+            if (!file) return;
 
             if (!file.type.startsWith("image/")) {
-                showFormMessage("Please choose a valid image file.", true);
                 imageInput.value = "";
-                selectedImage = "";
+                showMessage("Please select a valid image.", true);
                 return;
             }
 
-            // Keep files small to reduce browser storage problems.
-            const maxSize = 1.5 * 1024 * 1024;
-
-            if (file.size > maxSize) {
-                showFormMessage(
+            if (file.size > 1.5 * 1024 * 1024) {
+                imageInput.value = "";
+                showMessage(
                     "Please choose an image smaller than 1.5 MB.",
                     true
                 );
-
-                imageInput.value = "";
-                selectedImage = "";
                 return;
             }
 
@@ -465,12 +616,12 @@ function setupBoardEditor() {
 
             reader.onload = function () {
                 selectedImage = String(reader.result || "");
-                showFormMessage("Image ready to save.", false);
+                showMessage("Image loaded and ready to save.", false);
             };
 
             reader.onerror = function () {
                 selectedImage = "";
-                showFormMessage("Could not read that image. Try another.", true);
+                showMessage("Unable to read that image. Please try again.", true);
             };
 
             reader.readAsDataURL(file);
@@ -484,45 +635,37 @@ function setupBoardEditor() {
         const positionInput = document.getElementById("member-position");
         const descriptionInput = document.getElementById("member-description");
 
-        if (!nameInput || !positionInput || !descriptionInput) {
-            showFormMessage("The board form is missing a field.", true);
-            return;
-        }
+        if (!nameInput || !positionInput || !descriptionInput) return;
 
         const name = nameInput.value.trim();
         const position = positionInput.value.trim();
         const description = descriptionInput.value.trim();
 
         if (!name || !position || !description) {
-            showFormMessage(
-                "Please fill in the name, position and description.",
-                true
-            );
+            showMessage("Please complete all required fields.", true);
             return;
         }
 
         const members = getSavedBoardMembers();
 
         if (members.length >= 6) {
-            showFormMessage(
-                "The board section is limited to six members. Edit your board member list in the script to change existing profiles.",
+            showMessage(
+                "You have reached the six-member limit. Update the boardMembers list in script.js to replace profiles.",
                 true
             );
             return;
         }
 
-        const newMember = {
+        members.push({
             name: name,
             position: position,
             description: description,
             image: selectedImage
-        };
-
-        members.push(newMember);
+        });
 
         if (!saveBoardMembers(members)) {
-            showFormMessage(
-                "Could not save. Try a smaller image or use a public image URL in script.js.",
+            showMessage(
+                "Saving failed. Try a smaller image or use a public image URL in script.js.",
                 true
             );
             return;
@@ -533,8 +676,8 @@ function setupBoardEditor() {
 
         renderBoard();
 
-        showFormMessage(
-            "Board member added in this browser. Remember: this does not publish the change for other visitors.",
+        showMessage(
+            "Profile added in this browser only. It is not yet published to all visitors.",
             false
         );
     });
@@ -543,63 +686,22 @@ function setupBoardEditor() {
         cancelButton.addEventListener("click", function () {
             form.reset();
             selectedImage = "";
-            showFormMessage("", false);
+            showMessage("", false);
         });
-    }
-
-    function showFormMessage(text, isError) {
-        if (!message) return;
-
-        message.textContent = text;
-        message.classList.toggle("error", Boolean(isError));
-        message.classList.toggle("success", Boolean(text) && !isError);
     }
 }
 
 
-/* 12. SCROLL REVEAL ANIMATIONS
-   Elements with the .reveal class appear as you scroll.
-   ========================================================= */
-
-function setupRevealAnimations() {
-    const elements = document.querySelectorAll(".reveal");
-
-    if (!("IntersectionObserver" in window)) {
-        elements.forEach(function (element) {
-            element.classList.add("visible");
-        });
-        return;
-    }
-
-    const observer = new IntersectionObserver(
-        function (entries, currentObserver) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    currentObserver.unobserve(entry.target);
-                }
-            });
-        },
-        {
-            threshold: 0.12
-        }
-    );
-
-    elements.forEach(function (element) {
-        observer.observe(element);
-    });
-}
-
-
-/* 13. START THE WEBSITE FEATURES
+/* 13. START EVERYTHING
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
     updateFooter();
+    setupLightbox();
     displayGallery();
     displayEvents();
     renderBoard();
     setupBoardToggle();
     setupBoardEditor();
-    setupRevealAnimations();
 });
+

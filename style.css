@@ -1208,5 +1208,129 @@ width: 100%;
     }
 
     .gallery-photo {
+flex-basis: 250px;
+        width: 250px;
+        height: 190px;
+    }
+
+    .about-section,
+    .board-section,
+    .events-section {
+        padding: 62px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 30px;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .value-card {
+        padding: 20px;
+    }
+.board-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .member-photo-wrap {
+        height: 280px;
+    }
+
+    .member-info {
+        padding: 21px;
+    }
+
+    .board-editor-panel {
+        padding: 20px 16px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .full-field {
+        grid-column: auto;
+    }
+
+    .editor-actions {
+flex-direction: column;
+    }
+
+    .editor-actions button {
+        width: 100%;
+    }
+
+    .events-container {
+        grid-template-columns: 1fr;
+        gap: 26px;
+    }
+
+    .event-image-wrapper {
+        height: 260px;
+    }
+
+    .event-content {
+        padding: 23px 20px 25px;
+    }
+
+    .event-title {
+        font-size: 1.25rem;
+    }
+
+    .cta-section {
+        padding: 60px 20px;
+    }
+.footer-inner {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer-links {
+        gap: 12px 18px;
+    }
+
+    .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .image-lightbox {
+        padding: 12px;
+    }
+
+    .lightbox-content img {
+        max-width: 96vw;
+        max-height: 78vh;
+    }
+
+    .lightbox-close {
+        top: 12px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* 16. REDUCED MOTION ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 
         

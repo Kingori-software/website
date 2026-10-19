@@ -5,164 +5,482 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Rotaract Club of Karatina University</title>
-
-    <meta name="description" content="Official website of the Rotaract Club of Karatina University. Discover our mission, upcoming events and opportunities to serve.">
+    <meta
+        name="description"
+        content="Welcome to the Rotaract Club of Karatina University. Discover our service projects, fellowship, leadership, events and community impact."
+    >
 
     <meta name="theme-color" content="#e91e63">
 
-    <!-- Google Font -->
+    <title>Rotaract Club of Karatina University</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER / HERO ================= -->
-    <!-- Logo image removed: club name comes first -->
+    <!-- ==========================================
+         HEADER
+         ========================================== -->
 
-    <header class="header" id="home">
+    <header class="header">
+        <div class="header-inner">
 
-        <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
-        <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+            <a class="brand" href="#home">
+                Rotaract Club of Karatina University
+            </a>
 
-        <span class="hero-eyebrow">
-            SERVICE • FELLOWSHIP • LEADERSHIP
-        </span>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#board">Our Board</a>
+                <a href="#events">Events</a>
+                <a href="#contact">Contact</a>
+            </nav>
 
-        <h1>
-            Rotaract Club of
-            <span>Karatina University</span>
-        </h1>
-
-        <p class="tagline">
-            Service Above Self
-        </p>
-
-        <p class="hero-intro">
-            Young people. Shared purpose. Meaningful impact.
-        </p>
-
-        <a href="#about" class="hero-button">
-            Discover Our Club <span aria-hidden="true">→</span>
-        </a>
-
-        <a href="#club-gallery" class="scroll-cue"
-           aria-label="Scroll to club gallery">
-            <span></span>
-        </a>
-
+        </div>
     </header>
 
 
-    <!-- ================= CLUB PHOTO SLIDESHOW ================= -->
+    <main>
 
-    <section class="gallery-section" id="club-gallery"
-             aria-label="Rotaract club photo gallery">
+        <!-- ==========================================
+             HERO / CLUB INTRODUCTION
+             ========================================== -->
 
-        <div class="gallery-heading reveal">
+        <section class="hero" id="home">
 
-            <span class="small-title">LIFE AT ROTARACT</span>
+            <div class="hero-content">
 
-            <h2>
-                People. Purpose. <span>Impact.</span>
-            </h2>
+                <p class="hero-eyebrow">
+                    Rotaract Club of Karatina University
+                </p>
 
-            <p class="section-description">
-                A glimpse of the moments and people that make our
-                club special.
-            </p>
+                <h1>
+                    Rotaract Club of
+                    <span>Karatina University</span>
+                </h1>
 
-        </div>
+                <p class="hero-tagline">
+                    Service. Fellowship. Leadership.
+                </p>
 
-        <!-- Images are automatically loaded by script.js -->
-        <div class="marquee"
-             aria-label="Automatically scrolling club photos">
+                <p class="hero-intro">
+                    A community of young leaders building friendships,
+                    serving others, developing leadership skills and
+                    creating meaningful change in our community.
+                </p>
 
-            <div class="marquee-track" id="gallery-track">
-                <!-- Slideshow images will be inserted here by JavaScript -->
+                <div class="hero-actions">
+                    <a href="#about" class="btn btn-primary">
+                        Discover Our Club
+                    </a>
+
+                    <a href="#events" class="btn btn-outline">
+                        Explore Our Events
+                    </a>
+                </div>
+
             </div>
 
-        </div>
-
-        <p class="gallery-note">
-            Our story, one moment at a time.
-        </p>
-
-    </section>
+        </section>
 
 
-    <!-- ================= ABOUT OUR CLUB ================= -->
+        <!-- ==========================================
+             CLUB PHOTO SLIDESHOW
+             Images move from right to left.
+             Clicking an image opens the full image viewer.
+             ========================================== -->
 
-    <section id="about" class="about-section reveal">
+        <section
+            class="gallery-section"
+            id="club-gallery"
+            aria-labelledby="gallery-title"
+        >
 
-        <div class="section-heading">
+            <div class="gallery-heading">
 
-            <span class="small-title">WHO WE ARE</span>
+                <span class="section-kicker">Our Moments</span>
 
-            <h2>About Our Club</h2>
-
-            <div class="heading-line"></div>
-
-        </div>
-
-        <div class="about-content">
-
-            <div class="about-text">
+                <h2 id="gallery-title">
+                    Life at <span class="pink-text">Rotaract</span>
+                </h2>
 
                 <p>
-                    The <strong>Rotaract Club of Karatina University</strong>
-                    is a community of young people committed to creating
-                    positive change through service, leadership, friendship
-                    and professional development.
+                    The people, experiences and memories behind our impact.
                 </p>
 
-                <p>
-                    We bring together students who want to make a difference
-                    both within the university and in the wider community.
-                    Through meaningful projects, fellowship and leadership
-                    opportunities, we learn, connect and serve together.
-                </p>
+            </div>
 
-                <div class="values">
+            <div class="marquee" aria-label="Club photo slideshow">
 
-                    <div class="value-card">
+                <div
+                    class="marquee-track"
+                    id="gallery-track"
+                >
+                    <!-- Photo cards are inserted by script.js. -->
+                </div>
 
-                        <div class="value-icon">🤝</div>
+            </div>
+
+            <p class="gallery-note">
+                Tap any photo to view the full image.
+            </p>
+
+        </section>
+
+
+        <!-- ==========================================
+             ABOUT OUR CLUB
+             ========================================== -->
+
+        <section class="about-section" id="about">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-kicker">Who We Are</span>
+
+                    <h2>
+                        More Than a Club.
+                        <span class="pink-text">A Community.</span>
+                    </h2>
+
+                    <p>
+                        We bring students together through service,
+                        friendship and opportunities to grow as leaders.
+                    </p>
+
+                </div>
+
+                <div class="about-content">
+
+                    <div class="about-text">
+
+                        <h2>
+                            Growing Through
+                            <span>Service and Fellowship</span>
+                        </h2>
+
+                        <p>
+                            The Rotaract Club of Karatina University is a
+                            community where young people connect, learn,
+                            lead and work together to make a difference.
+                        </p>
+
+                        <p>
+                            Through community outreach, professional
+                            development, fellowship and service projects,
+                            we create opportunities for members to discover
+                            their potential while contributing to society.
+                        </p>
+
+                        <p>
+                            We believe that leadership is strengthened by
+                            service, friendships create lasting connections,
+                            and small actions can make a meaningful impact.
+                        </p>
+
+                        <a href="#events" class="btn btn-primary">
+                            See What We're Doing
+                        </a>
+
+                    </div>
+
+                    <div class="about-visual">
+
+                        <div class="about-visual-content">
+
+                            <div class="decorative-circle" aria-hidden="true">
+                                ✦
+                            </div>
+
+                            <h3>People of Action</h3>
+
+                            <p>
+                                Connecting people, creating opportunities
+                                and serving our community together.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CLUB VALUES -->
+
+                <div class="values-grid">
+
+                    <article class="value-card">
+
+                        <div class="value-icon" aria-hidden="true">
+                            ♡
+                        </div>
 
                         <h3>Service</h3>
 
                         <p>
-                            Creating positive impact in our community.
+                            Taking action to support communities and
+                            contribute to positive change.
                         </p>
 
-                    </div>
+                    </article>
 
-                    <div class="value-card">
 
-                        <div class="value-icon">🌱</div>
+                    <article class="value-card">
 
-                        <h3>Growth</h3>
-
-                        <p>
-                            Developing skills, confidence and leadership.
-                        </p>
-
-                    </div>
-
-                    <div class="value-card">
-
-                        <div class="value-icon">❤️</div>
+                        <div class="value-icon" aria-hidden="true">
+                            ✦
+                        </div>
 
                         <h3>Fellowship</h3>
 
                         <p>
-                            Building friendships that make a difference.
+                            Building genuine friendships, sharing
+                            experiences and growing together.
                         </p>
+
+                    </article>
+
+
+                    <article class="value-card">
+
+                        <div class="value-icon" aria-hidden="true">
+                            ♛
+                        </div>
+
+                        <h3>Leadership</h3>
+
+                        <p>
+                            Developing confidence, responsibility and
+                            the skills to inspire meaningful action.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             BOARD MEMBERS
+             ========================================== -->
+
+        <section class="board-section" id="board">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-kicker">Meet Our Leaders</span>
+
+                    <h2>
+                        The People Behind
+                        <span class="pink-text">Our Club</span>
+                    </h2>
+
+                    <p>
+                        Meet the team working together to guide our
+                        activities, strengthen fellowship and support
+                        our club's mission.
+                    </p>
+
+                </div>
+
+
+                <div class="board-toggle-wrap">
+
+                    <button
+                        type="button"
+                        class="board-toggle"
+                        id="board-toggle"
+                        aria-expanded="false"
+                        aria-controls="board-content"
+                    >
+                        <span class="toggle-label">
+                            See Board Members
+                        </span>
+
+                        <span class="toggle-symbol" aria-hidden="true">
+                            +
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="board-content"
+                    id="board-content"
+                    hidden
+                >
+
+                    <div
+                        class="board-grid"
+                        id="board-grid"
+                    >
+                        <!-- Board member cards are inserted by script.js. -->
+                    </div>
+
+                </div>
+
+
+                <!-- BOARD EDITOR -->
+
+                <div class="board-editor">
+
+                    <button
+                        type="button"
+                        class="editor-toggle"
+                        id="editor-toggle"
+                        aria-expanded="false"
+                        aria-controls="board-editor-panel"
+                    >
+                        Manage Board Profiles
+                    </button>
+
+
+                    <div
+                        class="board-editor-panel"
+                        id="board-editor-panel"
+                        hidden
+                    >
+
+                        <h3>Board Profile Editor</h3>
+
+                        <p>
+                            Add board member details and a profile image.
+                            This browser editor is for local testing;
+                            it does not publish changes to every visitor.
+                        </p>
+
+                        <div class="editor-notice">
+                            The website supports up to six board member
+                            profiles. For public updates, edit the
+                            boardMembers list in script.js or connect
+                            the site to a content management system.
+                        </div>
+
+
+                        <form id="board-member-form">
+
+                            <div class="form-grid">
+
+                                <div class="form-field">
+
+                                    <label for="member-name">
+                                        Full Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="member-name"
+                                        name="member-name"
+                                        placeholder="Enter full name"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-field">
+
+                                    <label for="member-position">
+                                        Board Position
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="member-position"
+                                        name="member-position"
+                                        placeholder="e.g. President"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="form-field full-field">
+
+                                    <label for="member-description">
+                                        Short Description
+                                    </label>
+
+                                    <textarea
+                                        id="member-description"
+                                        name="member-description"
+                                        placeholder="Write a short introduction..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <div class="form-field full-field">
+
+                                    <label for="member-image">
+                                        Profile Image
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="member-image"
+                                        name="member-image"
+                                        accept="image/*"
+                                    >
+
+                                    <small class="field-help">
+                                        Choose an image smaller than 1.5 MB.
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="editor-actions">
+
+                                <button
+                                    type="submit"
+                                    class="form-submit"
+                                >
+                                    Add Board Member
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="cancel-button"
+                                    id="cancel-edit"
+                                >
+                                    Clear Form
+                                </button>
+
+                            </div>
+
+
+                            <p
+                                class="form-message"
+                                id="form-message"
+                                role="status"
+                                aria-live="polite"
+                            ></p>
+
+                        </form>
 
                     </div>
 
@@ -170,262 +488,190 @@
 
             </div>
 
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- ================= BOARD MEMBERS ================= -->
+        <!-- ==========================================
+             UPCOMING EVENTS
+             ========================================== -->
 
-    <section id="board" class="board-section">
+        <section class="events-section" id="events">
 
-        <div class="section-heading reveal">
+            <div class="container">
 
-            <span class="small-title">
-                THE PEOPLE BEHIND THE SERVICE
-            </span>
+                <div class="section-heading">
 
-            <h2>Meet Our Board</h2>
+                    <span class="section-kicker">Mark Your Calendar</span>
 
-            <div class="heading-line"></div>
+                    <h2>
+                        Upcoming
+                        <span class="pink-text">Events</span>
+                    </h2>
 
-            <p class="section-description">
-                Meet the team helping our club turn ideas into action.
-            </p>
-
-        </div>
-
-        <!-- Tap to expand or collapse board profiles -->
-
-        <div class="board-toggle-wrap">
-
-            <button
-                class="board-toggle"
-                id="board-toggle"
-                type="button"
-                aria-expanded="false"
-                aria-controls="board-content">
-
-                <span>See Board Members</span>
-
-                <span class="toggle-symbol" aria-hidden="true">+</span>
-
-            </button>
-
-        </div>
-
-        <div class="board-content" id="board-content" hidden>
-
-            <!-- Up to six member cards are created by script.js -->
-
-            <div class="board-grid" id="board-grid">
-            </div>
-
-            <!-- Board member editor -->
-
-            <div class="board-editor">
-
-                <button
-                    type="button"
-                    class="editor-toggle"
-                    id="editor-toggle"
-                    aria-expanded="false"
-                    aria-controls="board-editor-panel">
-
-                    <span aria-hidden="true">＋</span>
-                    Add or Edit Board Members
-
-                </button>
-
-                <div
-                    id="board-editor-panel"
-                    class="board-editor-panel"
-                    hidden>
-
-                    <p class="editor-notice">
-                        <strong>Website editor:</strong>
-                        Add up to six board profiles below. Changes made
-                        here are saved only in this browser. To publish
-                        changes for everyone, update the
-                        <code>boardMembers</code> list in
-                        <code>script.js</code> or connect a backend.
+                    <p>
+                        Join us for experiences that bring people together,
+                        build friendships and create positive change.
                     </p>
 
-                    <form id="member-form">
+                </div>
 
-                        <input
-                            type="hidden"
-                            id="member-index"
-                            value="-1">
 
-                        <div class="form-grid">
+                <div
+                    class="events-container"
+                    id="events-container"
+                >
+                    <!-- Event cards are inserted by script.js. -->
+                </div>
 
-                            <label>
-                                Full name
+            </div>
 
-                                <input
-                                    id="member-name"
-                                    type="text"
-                                    maxlength="80"
-                                    required
-                                    placeholder="e.g. Jane Wanjiku">
-                            </label>
+        </section>
 
-                            <label>
-                                Position
 
-                                <input
-                                    id="member-position"
-                                    type="text"
-                                    maxlength="80"
-                                    required
-                                    placeholder="e.g. President">
-                            </label>
+        <!-- ==========================================
+             CALL TO ACTION
+             ========================================== -->
 
-                            <label class="full-field">
-                                Short description
+        <section class="cta-section" id="contact">
 
-                                <textarea
-                                    id="member-description"
-                                    rows="3"
-                                    maxlength="400"
-                                    required
-                                    placeholder="A short introduction about this board member"></textarea>
-                            </label>
+            <div class="cta-content">
 
-                            <label class="full-field">
-                                Profile image
+                <span class="section-kicker">
+                    Be Part of Something Meaningful
+                </span>
 
-                                <input
-                                    id="member-image"
-                                    type="file"
-                                    accept="image/*">
+                <h2>
+                    Your Journey Starts With One Connection.
+                </h2>
 
-                                <span class="field-help">
-                                    Choose a photo from your device.
-                                    For the live website, use a hosted
-                                    image URL in script.js.
-                                </span>
-                            </label>
+                <p>
+                    Looking to build friendships, develop your leadership
+                    skills and make a difference? Connect with the
+                    Rotaract Club of Karatina University.
+                </p>
 
-                        </div>
+                <div class="hero-actions">
 
-                        <div class="editor-actions">
+                    <!-- Replace the example URL with the club's real contact link. -->
+                    <a
+                        href="https://www.instagram.com/rotaract_club_of_karatina_uni/"
+                        class="btn btn-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Connect With Us
+                    </a>
 
-                            <button
-                                class="cta-button form-submit"
-                                type="submit">
-                                Save Member
-                            </button>
-
-                            <button
-                                class="cancel-button"
-                                id="member-cancel"
-                                type="button">
-                                Clear Form
-                            </button>
-
-                        </div>
-
-                        <p
-                            id="form-message"
-                            class="form-message"
-                            role="status">
-                        </p>
-
-                    </form>
+                    <a href="#home" class="btn btn-outline">
+                        Back to Top ↑
+                    </a>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
-
-
-    <!-- ================= UPCOMING EVENTS ================= -->
-
-    <section id="events" class="events-section">
-
-        <div class="section-heading reveal">
-
-            <span class="small-title">WHAT'S COMING</span>
-
-            <h2>Upcoming Events</h2>
-
-            <div class="heading-line"></div>
-
-            <p class="section-description">
-                Join us, connect with fellow Rotaractors and make memories
-                while serving with purpose.
-            </p>
-
-        </div>
-
-        <!-- Events will automatically be loaded from script.js -->
-
-        <div id="events-container" class="events-container">
-        </div>
-
-    </section>
+    </main>
 
 
-    <!-- ================= JOIN / CALL TO ACTION ================= -->
+    <!-- ==========================================
+         FULL IMAGE VIEWER
+         Clicking an image will open it at a larger size.
+         JavaScript will control the viewer.
+         ========================================== -->
 
-    <section class="cta-section reveal">
+    <div
+        class="image-lightbox"
+        id="image-lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Full-size image viewer"
+        aria-hidden="true"
+        hidden
+    >
 
-        <div class="cta-content">
+        <button
+            type="button"
+            class="lightbox-close"
+            id="lightbox-close"
+            aria-label="Close image viewer"
+        >
+            &times;
+        </button>
 
-            <span class="small-title">BE PART OF THE CHANGE</span>
+        <button
+            type="button"
+            class="lightbox-backdrop"
+            id="lightbox-backdrop"
+            aria-label="Close full-size image"
+        ></button>
 
-            <h2>
-                Serve. Connect.<br>
-                <span>Make an Impact.</span>
-            </h2>
+        <div class="lightbox-content">
 
-            <p>
-                Discover what Rotaract has to offer and be part of a
-                community that believes in Service Above Self.
-            </p>
+            <img
+                id="lightbox-image"
+                src=""
+                alt=""
+            >
 
-            <a href="#events" class="cta-button">
-                View Upcoming Events
-            </a>
+            <p
+                id="lightbox-caption"
+                class="lightbox-caption"
+            ></p>
 
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
 
     <footer class="footer">
 
-        <div class="footer-logo">
+        <div class="footer-inner">
 
-            <span>ROTARACT</span>
+            <div class="footer-brand">
 
-            <strong>KARATINA UNIVERSITY</strong>
+                <h3>Rotaract Club of Karatina University</h3>
+
+                <p>
+                    Service. Fellowship. Leadership.
+                    Together, we create opportunities and make a difference.
+                </p>
+
+            </div>
+
+
+            <nav class="footer-links" aria-label="Footer navigation">
+
+                <a href="#home">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#board">Our Board</a>
+                <a href="#events">Events</a>
+                <a href="#contact">Contact</a>
+
+            </nav>
 
         </div>
 
-        <div class="footer-line"></div>
 
-        <p>
-            Rotaract Club of Karatina University
-        </p>
+        <div class="footer-bottom">
 
-        <p class="updated">
-            Last Updated by Admin on
-            <span id="last-updated"></span>
-        </p>
+            <p>
+                &copy; <span id="current-year"></span>
+                Rotaract Club of Karatina University.
+                All rights reserved.
+            </p>
 
-        <p class="copyright">
-            © <span id="current-year"></span>
-            Rotaract Club of Karatina University.
-            All Rights Reserved.
-        </p>
+            <p>
+                Last updated:
+                <span id="last-updated">Updating...</span>
+            </p>
+
+        </div>
 
     </footer>
 

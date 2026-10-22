@@ -11,19 +11,19 @@
 
 const galleryImages = [
     {
-        src: "https://i.ibb.co/JRdwnj72/IMG-20261014-WA0003-1.jpg",
+        src: "https://i.ibb.co/ZzNyjtNC/IMG-2047.jpg",
         alt: "Rotaract Club of Karatina University event"
     },
     {
-        src: "https://i.ibb.co/7cDk3cy/IMG-20261018-WA0055.jpg",
+        src: "https://i.ibb.co/8LBfdzdY/IMG-1225.jpg",
         alt: "Rotaract Club members at a community activity"
     },
     {
-        src: "https://i.ibb.co/JRdwnj72/IMG-20261014-WA0003-1.jpg",
+        src: "https://i.ibb.co/PvkB57Jn/IMG-20261017-173745-271.jpg",
         alt: "Rotaractors participating in club activities"
     },
     {
-        src: "https://i.ibb.co/7cDk3cy/IMG-20261018-WA0055.jpg",
+        src: "https://i.ibb.co/W4KYKKn0/IMG-2064-1.jpg",
         alt: "Rotaract fellowship and memories"
     }
 ];

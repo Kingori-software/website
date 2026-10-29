@@ -35,7 +35,7 @@ const galleryImages = [
    ========================================================= */
 
 const boardMembers = [
-    /*
+    
     {
         name: "Portia Gatihi",
         position: "Club President",
@@ -48,7 +48,7 @@ const boardMembers = [
         description: "Sharing our story and showcasing the impact of our club.",
         image: "https://example.com/your-photo.jpg"
     }
-    */
+    
 ];
 
 

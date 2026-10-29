@@ -42,7 +42,15 @@ const boardMembers = [
         description: "Leading our club through service, teamwork and fellowship.",
         image:"https://i.ibb.co/wFG1RZvT/IMG-1727.jpg"
     },
-    {
+{
+        name: "Christabel",
+        position: "Treasurer",
+        description: "Managing our Finances.",
+        image:"https://i.ibb.co/Pq1bM4B/IMG-20261017-WA0006-1.jpg"
+    },
+
+
+  {
         name: "Stephen",
         position: "PR & Image Director",
         description: "Sharing our story and showcasing the impact of our club.",

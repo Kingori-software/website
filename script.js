@@ -43,7 +43,7 @@ const boardMembers = [
         image: "https://i.ibb.co/wrR2bNWd/IMG-2078-1.jpg"
     },
     {
-        name: "Your Name",
+        name: "Stephen",
         position: "PR & Image Director",
         description: "Sharing our story and showcasing the impact of our club.",
         image: "https://example.com/your-photo.jpg"

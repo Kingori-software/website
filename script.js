@@ -40,7 +40,7 @@ const boardMembers = [
         name: "Portia Gatihi",
         position: "Club President",
         description: "Leading our club through service, teamwork and fellowship.",
-        image: "https://i.ibb.co/wrR2bNWd/IMG-2078-1.jpg"
+        image:"https://i.ibb.co/wFG1RZvT/IMG-1727.jpg"
     },
     {
         name: "Stephen",

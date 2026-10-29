@@ -43,12 +43,38 @@ const boardMembers = [
         image:"https://i.ibb.co/wFG1RZvT/IMG-1727.jpg"
     },
 {
+        name: "Kelvin",
+        position: "LTR",
+        description: "Sharing our story and showcasing the impact of our club.",
+        image: "https://example.com/your-photo.jpg"
+    },
+{
         name: "Christabel",
         position: "Treasurer",
         description: "Managing our Finances.",
         image:"https://i.ibb.co/Pq1bM4B/IMG-20261017-WA0006-1.jpg"
     },
 
+{
+        name: "Boniface",
+        position: "Sergeant At Arms",
+        description: "Sharing our story and showcasing the impact of our club.",
+        image: "https://example.com/your-photo.jpg"
+    },
+
+{
+        name: "Sly",
+        position: "PR & Image Director",
+        description: "Sharing our story and showcasing the impact of our club.",
+        image: "https://example.com/your-photo.jpg"
+    },
+
+{
+        name: "Annis",
+        position: "Secretary",
+        description: "Sharing our story and showcasing the impact of our club.",
+        image: "https://example.com/your-photo.jpg"
+    },
 
   {
         name: "Stephen",

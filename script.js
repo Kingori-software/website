@@ -53,7 +53,7 @@ const boardMembers = [
         name: "Chelangat",
         position: "Service Director",
         description: "Organizing our Activities and making sure they run Smoothly.",
-        image: "https://example.com/your-photo.jpg"
+        image: " <a href="https://i.ibb.co/DgrM12Q8/IMG-20261016-WA0168.jpg"
     }
     
     

@@ -47,17 +47,14 @@ const boardMembers = [
         position: "PR & Image Director",
         description: "Sharing our story and showcasing the impact of our club.",
         image: "https://example.com/your-photo.jpg"
-    }
-
+    },
 {
         name: "Chelangat",
         position: "Service Director",
         description: "Organizing our Activities and making sure they run Smoothly.",
         image:"https://i.ibb.co/DgrM12Q8/IMG-20261016-WA0168.jpg"
     }
-    
-    
-];
+    ];
 
 
 /* 3. UPCOMING EVENTS

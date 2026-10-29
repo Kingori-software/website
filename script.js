@@ -30,8 +30,8 @@ const galleryImages = [
 
 
 /* 2. BOARD MEMBERS
-   Add up to six real board members.
-   Use direct, publicly accessible image URLs.
+   
+   Wait For processing.
    ========================================================= */
 
 const boardMembers = [

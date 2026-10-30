@@ -443,7 +443,7 @@ function saveBoardMembers(members) {
     try {
         localStorage.setItem(
             BOARD_STORAGE_KEY,
-            JSON.stringify(members.slice(0, ,8))
+            JSON.stringify(members.slice(0, 8))
         );
 
         return true;

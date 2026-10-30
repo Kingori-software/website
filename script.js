@@ -428,14 +428,14 @@ function getSavedBoardMembers() {
             const parsed = JSON.parse(saved);
 
             if (Array.isArray(parsed)) {
-                return parsed.slice(0, 6);
+                return parsed.slice(0, 8);
             }
         }
     } catch (error) {
         console.warn("Unable to load saved board members.", error);
     }
 
-    return boardMembers.slice(0, 6);
+    return boardMembers.slice(0, 8);
 }
 
 
@@ -443,7 +443,7 @@ function saveBoardMembers(members) {
     try {
         localStorage.setItem(
             BOARD_STORAGE_KEY,
-            JSON.stringify(members.slice(0, 6))
+            JSON.stringify(members.slice(0, ,8))
         );
 
         return true;
@@ -465,7 +465,7 @@ function renderBoard() {
 
     grid.replaceChildren();
 
-    const members = getSavedBoardMembers().slice(0, 6);
+    const members = getSavedBoardMembers().slice(0, 8);
 
     if (members.length === 0) {
         grid.appendChild(
@@ -687,7 +687,7 @@ function setupBoardEditor() {
 
         const members = getSavedBoardMembers();
 
-        if (members.length >= 6) {
+        if (members.length >= 8) {
             showMessage(
                 "You have reached the six-member limit. Update the boardMembers list in script.js to replace profiles.",
                 true

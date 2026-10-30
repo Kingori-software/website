@@ -113,8 +113,7 @@ const events = [
         month: "NOVEMBER",
         time: "TO BE COMMUNICATED",
         description:
-            "
-Learn how to build, manage, and grow your business while in campus! Join us online on 5th Nov with Mr. Eric Obwaka, King of Business Networking, as he shares how to turn your network into your net worth."
+            "Learn how to build, manage, and grow your business while in campus! Join us online on 5th Nov with Mr. Eric Obwaka, King of Business Networking, as he shares how to turn your network into your net worth."
     }
 ];
 

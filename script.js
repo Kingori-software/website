@@ -59,7 +59,7 @@ const boardMembers = [
         name: "Boniface",
         position: "Sergeant At Arms",
         description: "Sharing our story and showcasing the impact of our club.",
-        image: "https://example.com/your-photo.jpg"
+        image:"https://i.ibb.co/YHXrySd/IMG-20261030-WA0005.jpg"
     },
 
 {

@@ -79,7 +79,7 @@ const boardMembers = [
   {
         name: "Stephen",
         position: "PR/ Public Image Director",
-        description: "Promotes the club’s public image by managing communications, social media, publicity, and documentation of club activities.",
+        description: "Leads the club’s public image and communications by managing social media platforms, creating promotional content, designing publicity materials, and increasing the club’s visibility and engagement.",
         image:"https://i.ibb.co/TDsS4JJg/IMG-20261013-152641-556.png"
     },
 {

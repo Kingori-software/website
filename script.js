@@ -78,8 +78,8 @@ const boardMembers = [
 
   {
         name: "Stephen",
-        position: "PR & Image Director",
-        description: "Sharing our story and showcasing the impact of our club.",
+        position: "PR/ Public Image Director",
+        description: "Promotes the club’s public image by managing communications, social media, publicity, and documentation of club activities.",
         image: "https://example.com/your-photo.jpg"
     },
 {

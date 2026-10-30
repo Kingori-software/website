@@ -15,7 +15,7 @@ const galleryImages = [
         alt: "Rotaract Club of Karatina University event"
     },
     {
-        src: "https://i.ibb.co/8LBfdzdY/IMG-1225.jpg",
+        src:"https://i.ibb.co/n8Kwt296/IMG-20261024-WA0031-1.jpg",
         alt: "Rotaract Club members at a community activity"
     },
     {
@@ -97,13 +97,13 @@ const boardMembers = [
 
 const events = [
     {
-        image: "https://i.ibb.co/JRdwnj72/IMG-20261014-WA0003-1.jpg",
-        name: "GAME NIGHT: Play • Connect • Have Fun",
+        image:"https://i.ibb.co/wZWkGyMB/IMG-20261030-WA0002-1.jpg",
+        name: "        "RFHD KENYA MEDICAL CAMP - NYERI COUNTY",
         date: "5-6",
         month: "NOVEMBER",
-        time: "6 PM",
+        time: "8:00 AM-5:00 PM",
         description:
-            "Enjoy an evening of games, friendship and fellowship with fellow Rotaractors. Come connect, make memories and have fun together."
+    "Free health services coming to Nyeri! Join us for the Rotary Family Health Days Medical Camp on 5th, 6th & 7th November 2026 at Whispers Park Ground, Nyeri Town from 8:00am to 5:00pm daily. Your health matters, karibu sana!"
     },
     {
         image:"https://i.ibb.co/PZ3X6R1b/IMG-20261030-WA0008.jpg",

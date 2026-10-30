@@ -39,40 +39,40 @@ const boardMembers = [
     {
         name: "Portia Gatihi",
         position: "Club President",
-        description: "Leading our club through service, teamwork and fellowship.",
+        description: "Provides leadership and strategic direction to the club, ensuring its goals and service objectives are achieved.",
         image:"https://i.ibb.co/wFG1RZvT/IMG-1727.jpg"
     },
 {
-        name: "Kelvin",
-        position: "LTR",
-        description: "Sharing our story and showcasing the impact of our club.",
+        name: "Kelvin Gitonga",
+        position: "IPP/TRF Director",
+        description: "Provides continuity and guidance to the club while promoting Rotary Foundation awareness, contributions, and initiatives.",
         image:"https://i.ibb.co/zHB69J9P/IMG-20261021-WA0032.jpg"
     },
 {
         name: "Christabel",
-        position: "Treasurer",
-        description: "Managing our Finances.",
+        position: "Finance Director",
+        description: "Oversees club finances, maintains accurate financial records, and ensures responsible budgeting and accountability.",
         image:"https://i.ibb.co/Pq1bM4B/IMG-20261017-WA0006-1.jpg"
     },
 
 {
         name: "Boniface",
         position: "Sergeant At Arms",
-        description: "Sharing our story and showcasing the impact of our club.",
+        description: "Supports the President in club leadership and maintains order, protocol, and proper conduct during meetings and events.",
         image:"https://i.ibb.co/YHXrySd/IMG-20261030-WA0005.jpg"
     },
 
 {
         name: "Sly",
         position: "Secretary",
-        description: "####.",
+        description: " Maintains club records, prepares meeting minutes, manages official correspondence, and supports effective administration.",
         image:"https://i.ibb.co/WWMq9fys/IMG-20261018-WA0012.jpg"
     },
 
 {
         name: "Annis",
-        position: "International Membership Director",
-        description: "Sharing our story and showcasing the impact of our club.",
+        position: "Membership and International Service Director – Annis",
+        description: "Supports member recruitment, engagement, and retention while promoting international fellowship, collaboration, and service opportunities. ",
         image:"https://i.ibb.co/pvTPTH8x/IMG-20260916-WA0016.jpg"
     },
 
@@ -85,7 +85,7 @@ const boardMembers = [
 {
         name: "Chelangat",
         position: "Service Director",
-        description: "Organizing our Activities and making sure they run Smoothly.",
+        description: "Coordinates community service projects and initiatives that address local needs and create meaningful, lasting impact.",
         image:"https://i.ibb.co/DgrM12Q8/IMG-20261016-WA0168.jpg"
     }
     ];

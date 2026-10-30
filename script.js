@@ -43,19 +43,6 @@ const boardMembers = [
         image:"https://i.ibb.co/wFG1RZvT/IMG-1727.jpg"
     },
 {
-        name: "Kelvin Gitonga",
-        position: "IPP/TRF Director",
-        description: "Provides continuity and guidance to the club while promoting Rotary Foundation awareness, contributions, and initiatives.",
-        image:"https://i.ibb.co/zHB69J9P/IMG-20261021-WA0032.jpg"
-    },
-{
-        name: "Christabel",
-        position: "Finance Director",
-        description: "Oversees club finances, maintains accurate financial records, and ensures responsible budgeting and accountability.",
-        image:"https://i.ibb.co/Pq1bM4B/IMG-20261017-WA0006-1.jpg"
-    },
-
-{
         name: "Boniface",
         position: "Sergeant At Arms",
         description: "Supports the President in club leadership and maintains order, protocol, and proper conduct during meetings and events.",
@@ -70,23 +57,36 @@ const boardMembers = [
     },
 
 {
-        name: "Annis",
-        position: "Membership and International Service Director – Annis",
-        description: "Supports member recruitment, engagement, and retention while promoting international fellowship, collaboration, and service opportunities. ",
-        image:"https://i.ibb.co/pvTPTH8x/IMG-20260916-WA0016.jpg"
+        name: "Kelvin Gitonga",
+        position: "IPP/TRF Director",
+        description: "Provides continuity and guidance to the club while promoting Rotary Foundation awareness, contributions, and initiatives.",
+        image:"https://i.ibb.co/zHB69J9P/IMG-20261021-WA0032.jpg"
     },
-
-  {
+{
+        name: "Christabel",
+        position: "Finance Director",
+        description: "Oversees club finances, maintains accurate financial records, and ensures responsible budgeting and accountability.",
+        image:"https://i.ibb.co/Pq1bM4B/IMG-20261017-WA0006-1.jpg"
+    },
+ {
         name: "Stephen",
         position: "PR/ Public Image Director",
         description: "Leads the club’s public image and communications by managing social media platforms, creating promotional content, designing publicity materials, and increasing the club’s visibility and engagement.",
         image:"https://i.ibb.co/TDsS4JJg/IMG-20261013-152641-556.png"
     },
+
+
 {
         name: "Chelangat",
         position: "Service Director",
         description: "Coordinates community service projects and initiatives that address local needs and create meaningful, lasting impact.",
         image:"https://i.ibb.co/DgrM12Q8/IMG-20261016-WA0168.jpg"
+    },
+{
+        name: "Annis",
+        position: "Membership and International Service Director – Annis",
+        description: "Supports member recruitment, engagement, and retention while promoting international fellowship, collaboration, and service opportunities. ",
+        image:"https://i.ibb.co/pvTPTH8x/IMG-20260916-WA0016.jpg"
     }
     ];
 

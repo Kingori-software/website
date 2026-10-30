@@ -99,7 +99,7 @@ const boardMembers = [
 const events = [
     {
         image:"https://i.ibb.co/wZWkGyMB/IMG-20261030-WA0002-1.jpg",
-        name: "        "RFHD KENYA MEDICAL CAMP - NYERI COUNTY",
+        name:"RFHD KENYA MEDICAL CAMP - NYERI COUNTY",
         date: "5-6",
         month: "NOVEMBER",
         time: "8:00 AM-5:00 PM",

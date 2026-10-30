@@ -15,9 +15,8 @@ const galleryImages = [
         alt: "Rotaract Club of Karatina University event"
     },
     {
-        src:
-"https://i.ibb.co/n8Kwt296/IMG-20261024-WA0031-1.jpg",
-        alt: "Rotaract Club members at a community activity"
+        src:"https://i.ibb.co/1fmXyN8Z/IMG-1225.jpg",
+        alt: "Rotaract Club members at a Leadership Event"
     },
     {
         src: "https://i.ibb.co/PvkB57Jn/IMG-20261017-173745-271.jpg",

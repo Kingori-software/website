@@ -99,8 +99,8 @@ const events = [
     {
         image: "https://i.ibb.co/JRdwnj72/IMG-20261014-WA0003-1.jpg",
         name: "GAME NIGHT: Play • Connect • Have Fun",
-        date: "19",
-        month: "OCT",
+        date: "5-6",
+        month: "NOVEMBER",
         time: "6 PM",
         description:
             "Enjoy an evening of games, friendship and fellowship with fellow Rotaractors. Come connect, make memories and have fun together."
@@ -108,11 +108,13 @@ const events = [
     {
         image: "https://i.ibb.co/7cDk3cy/IMG-20261018-WA0055.jpg",
         name: "WORLD POLIO DAY 2026: Walk & Talk",
-        date: "24",
-        month: "OCT",
-        time: "10 AM",
+        date: "5",
+        month: "NOVEMBER",
+        time: "TO BE COMMUNICATED",
         description:
-            "Join us on 24 October 2026 at 10:00 AM. Meet at Kamukunji Grounds, walk around Nyeri Town, and talk at St. Mary's Boys' Secondary School. Everyone is welcome!"
+            "HOW TO MANAGE AND GROW YOUR BUSINESS WHILE STILL IN CAMPUS
+
+Learn how to build, manage, and grow your business while in campus! Join us online on 5th Nov with Mr. Eric Obwaka, King of Business Networking, as he shares how to turn your network into your net worth."
     }
 ];
 

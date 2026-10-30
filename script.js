@@ -81,7 +81,7 @@ const boardMembers = [
         name: "Stephen",
         position: "PR/ Public Image Director",
         description: "Promotes the club’s public image by managing communications, social media, publicity, and documentation of club activities.",
-        image:"https://i.ibb.co/nNzMQ9D9/IMG-20261010-154329-801.jpg"
+        image:"https://i.ibb.co/TDsS4JJg/IMG-20261013-152641-556.png"
     },
 {
         name: "Chelangat",

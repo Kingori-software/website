@@ -106,14 +106,13 @@ const events = [
             "Enjoy an evening of games, friendship and fellowship with fellow Rotaractors. Come connect, make memories and have fun together."
     },
     {
-        image: "https://i.ibb.co/7cDk3cy/IMG-20261018-WA0055.jpg",
-        name: "WORLD POLIO DAY 2026: Walk & Talk",
+        image:"https://i.ibb.co/PZ3X6R1b/IMG-20261030-WA0008.jpg",
+        name: "HOW TO MANAGE AND GROW YOUR BUSINESS WHILE STILL IN CAMPUS",
         date: "5",
         month: "NOVEMBER",
         time: "TO BE COMMUNICATED",
         description:
-            "HOW TO MANAGE AND GROW YOUR BUSINESS WHILE STILL IN CAMPUS
-
+            "
 Learn how to build, manage, and grow your business while in campus! Join us online on 5th Nov with Mr. Eric Obwaka, King of Business Networking, as he shares how to turn your network into your net worth."
     }
 ];

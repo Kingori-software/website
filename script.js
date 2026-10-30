@@ -64,9 +64,9 @@ const boardMembers = [
 
 {
         name: "Sly",
-        position: "PR & Image Director",
-        description: "Sharing our story and showcasing the impact of our club.",
-        image: "https://example.com/your-photo.jpg"
+        position: "Secretary",
+        description: "####.",
+        image:"https://i.ibb.co/WWMq9fys/IMG-20261018-WA0012.jpg"
     },
 
 {

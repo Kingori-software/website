@@ -46,7 +46,7 @@ const boardMembers = [
         name: "Kelvin",
         position: "LTR",
         description: "Sharing our story and showcasing the impact of our club.",
-        image: "https://example.com/your-photo.jpg"
+        image:"https://i.ibb.co/zHB69J9P/IMG-20261021-WA0032.jpg"
     },
 {
         name: "Christabel",
@@ -71,9 +71,9 @@ const boardMembers = [
 
 {
         name: "Annis",
-        position: "Secretary",
+        position: "International Membership Director",
         description: "Sharing our story and showcasing the impact of our club.",
-        image: "https://example.com/your-photo.jpg"
+        image:"https://i.ibb.co/pvTPTH8x/IMG-20260916-WA0016.jpg"
     },
 
   {

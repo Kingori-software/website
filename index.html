@@ -1,553 +1,423 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="description"
-        content="Welcome to the Rotaract Club of Karatina University. Discover our service projects, fellowship, leadership, events and community impact."
-    >
+  <meta name="description" content="CTT Youth Media — Sunday services, upcoming events and media team.">
+  <meta name="theme-color" content="#090909">
 
-    <meta name="theme-color" content="#e91e63">
+  <title>CTT Youth Media</title>
 
-    <title>Rotaract Club of Karatina University</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link rel="stylesheet" href="style.css">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body>
 
-    <!-- ==========================================
-         HEADER
-         ========================================== -->
+  <!-- =========================
+       LOGIN SCREEN
+  ========================== -->
+  <section id="loginScreen" class="login-screen">
 
-    <header class="header">
-        <div class="header-inner">
+    <div class="login-background">
+      <span class="glow glow-one"></span>
+      <span class="glow glow-two"></span>
+      <span class="glow glow-three"></span>
+    </div>
 
-            <a class="brand" href="#home">
-                Rotaract Club of Karatina University
-            </a>
+    <div class="login-card">
 
-            <nav class="nav-links" aria-label="Main navigation">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#board">Our Board</a>
-                <a href="#events">Events</a>
-                <a href="#contact">Contact</a>
-            </nav>
+      <div class="login-brand">
+        <div class="brand-mark">CTT</div>
 
+        <div class="brand-text">
+          <strong>CTT YOUTH</strong>
+          <small>MEDIA</small>
         </div>
+      </div>
+
+      <div class="login-avatar" id="loginFace" aria-live="polite">
+        <span id="faceEmoji">😊</span>
+      </div>
+
+      <p class="eyebrow">WELCOME BACK</p>
+
+      <h1 class="login-title">
+        Your space.<br>
+        <span>Your people.</span>
+      </h1>
+
+      <p class="login-description">
+        Sign in to access the CTT Youth Media website.
+      </p>
+
+      <form id="loginForm" class="login-form" autocomplete="on">
+
+        <div class="form-field">
+          <label for="loginName">Your name</label>
+
+          <input
+            id="loginName"
+            name="username"
+            type="text"
+            placeholder="Enter your name"
+            autocomplete="username"
+            autocapitalize="words"
+            maxlength="40"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="loginPassword">Password</label>
+
+          <div class="password-wrapper">
+            <input
+              id="loginPassword"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              id="togglePassword"
+              class="password-toggle"
+              aria-label="Show password"
+              aria-pressed="false"
+            >
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <p
+          id="loginMessage"
+          class="login-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+        <button type="submit" class="btn primary login-button">
+          <span>Enter CTT Media</span>
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </button>
+
+      </form>
+
+      <div class="login-hint">
+        <span class="hint-icon">✦</span>
+        <p>Use your assigned name and password.</p>
+      </div>
+
+      <p class="login-footer">
+        CTT YOUTH MEDIA <span>•</span> SERVICE. CREATIVITY. COMMUNITY.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- =========================
+       MAIN WEBSITE
+       Hidden until login succeeds
+  ========================== -->
+  <div id="websiteContent" hidden>
+
+    <!-- HEADER -->
+    <header class="site-header" id="top">
+
+      <a href="#top" class="brand" aria-label="CTT Youth Media home">
+
+        <span class="brand-mark">CTT</span>
+
+        <span class="brand-text">
+          <strong>CTT YOUTH</strong>
+          <small>MEDIA</small>
+        </span>
+
+      </a>
+
+      <div class="welcome-user">
+        <span class="welcome-dot"></span>
+        <span id="welcomeMessage">Hello!</span>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <a href="#day">Sunday</a>
+        <a href="#events">Events</a>
+        <a href="#media-team">Media Team</a>
+        <a href="#chat">Bot Chat</a>
+        <a href="#admin">Admin</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeToggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          <span id="themeIcon">🌑</span>
+        </button>
+
+        <button
+          id="logoutButton"
+          class="logout-button"
+          type="button"
+        >
+          Log out
+        </button>
+
+      </div>
+
     </header>
 
 
+    <!-- MAIN -->
     <main>
 
-        <!-- ==========================================
-             HERO / CLUB INTRODUCTION
-             ========================================== -->
+      <!-- HERO -->
+      <section class="hero">
 
-        <section class="hero" id="home">
+        <div class="hero-copy">
 
-            <div class="hero-content">
+          <p class="eyebrow">CTT YOUTH MEDIA</p>
 
-                <p class="hero-eyebrow">
-                    Rotaract Club of Karatina University
-                </p>
+          <h1>
+            Youth.<br>
+            <span>Media.</span>
+          </h1>
 
-                <h1>
-                    Rotaract Club of
-                    <span>Karatina University</span>
-                </h1>
+          <p class="hero-text">
+            Stay connected with Sunday services, upcoming events
+            and the people serving through media.
+          </p>
 
-                <p class="hero-tagline">
-                    Service. Fellowship. Leadership.
-                </p>
+          <div class="hero-actions">
+            <a href="#events" class="btn primary">View Events</a>
+            <a href="#chat" class="btn secondary">Ask the Bot</a>
+          </div>
 
-                <p class="hero-intro">
-                    A community of young leaders building friendships,
-                    serving others, developing leadership skills and
-                    creating meaningful change in our community.
-                </p>
+        </div>
 
-                <div class="hero-actions">
-                    <a href="#about" class="btn btn-primary">
-                        Discover Our Club
-                    </a>
+        <div class="hero-card">
 
-                    <a href="#events" class="btn btn-outline">
-                        Explore Our Events
-                    </a>
-                </div>
+          <div class="live-status">
+            <span class="live-dot"></span>
+            THIS SUNDAY
+          </div>
 
+          <h3>Two Services</h3>
+
+          <div class="service-mini">
+            <b>08:30</b>
+            <span>Teens Service</span>
+          </div>
+
+          <div class="service-mini">
+            <b>11:30</b>
+            <span>Youth Service</span>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- UPCOMING SUNDAY -->
+      <section id="day" class="section">
+
+        <div class="section-heading">
+          <p class="eyebrow">UPCOMING</p>
+          <h2>This Upcoming Sunday</h2>
+        </div>
+
+        <article class="preacher-card sunday-card">
+
+          <div class="sunday-image-wrapper">
+            <img
+              src="https://i.ibb.co/9HNvNcDD/IMG-20260906-WA3666.jpg"
+              alt="CTT Youth Media upcoming Sunday"
+              loading="lazy"
+            >
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- EVENTS -->
+      <section id="events" class="section alt">
+
+        <div class="section-heading">
+          <p class="eyebrow">DON'T MISS OUT</p>
+          <h2>Upcoming Events</h2>
+          <p>Stay informed about what's happening at CTT.</p>
+        </div>
+
+        <div id="eventsGrid" class="cards-grid"></div>
+
+      </section>
+
+
+      <!-- MEDIA TEAM -->
+      <section id="media-team" class="section">
+
+        <div class="section-heading">
+          <p class="eyebrow">SERVING THIS SUNDAY</p>
+          <h2>Media Team</h2>
+          <p>Meet the people serving through media this Sunday.</p>
+        </div>
+
+        <div class="team-service">
+
+          <h3 class="team-service-title">
+            First Service <span>(8:30am)</span>
+          </h3>
+
+          <div id="teamGridFirst" class="team-grid"></div>
+
+        </div>
+
+        <div class="team-service">
+
+          <h3 class="team-service-title">
+            Second Service <span>(11:30am)</span>
+          </h3>
+
+          <div id="teamGridSecond" class="team-grid"></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- CHATBOT -->
+      <section id="chat" class="section alt">
+
+        <div class="section-heading">
+          <p class="eyebrow">QUICK ANSWERS</p>
+          <h2>CTT Youth Bot</h2>
+          <p>Ask about service times, services or upcoming events.</p>
+        </div>
+
+        <div class="chat-shell">
+
+          <div
+            id="chatMessages"
+            class="chat-messages"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
+
+            <div class="message bot">
+              <b>CTT Bot</b>
+              <span>
+                Hey! Ask me about service timings, the first service,
+                second service, or upcoming events.
+              </span>
             </div>
 
-        </section>
+          </div>
+
+          <div class="quick-questions">
+
+            <button type="button" data-question="What are the service timings?">
+              Service timings?
+            </button>
+
+            <button type="button" data-question="What service is the first service?">
+              First service?
+            </button>
+
+            <button type="button" data-question="What service is the second service?">
+              Second service?
+            </button>
+
+            <button type="button" data-question="What are the upcoming events?">
+              Upcoming events?
+            </button>
+
+          </div>
+
+          <form id="chatForm" class="chat-input">
+
+            <input
+              id="chatInput"
+              type="text"
+              autocomplete="off"
+              placeholder="Ask CTT Bot..."
+              aria-label="Ask CTT Bot"
+              required
+            >
+
+            <button class="btn primary" type="submit">Send</button>
+
+          </form>
+
+        </div>
+
+      </section>
 
 
-        <!-- ==========================================
-             CLUB PHOTO SLIDESHOW
-             Images move from right to left.
-             Clicking an image opens the full image viewer.
-             ========================================== -->
+      <!-- ADMIN CONTACT -->
+      <section id="admin" class="section admin-section">
 
-        <section
-            class="gallery-section"
-            id="club-gallery"
-            aria-labelledby="gallery-title"
-        >
+        <div class="admin-card">
 
-            <div class="gallery-heading">
+          <div>
+            <p class="eyebrow">NEED HELP?</p>
 
-                <span class="section-kicker">Our Moments</span>
+            <h2>Private chat with the admin</h2>
 
-                <h2 id="gallery-title">
-                    Life at <span class="pink-text">Rotaract</span>
-                </h2>
-
-                <p>
-                    The people, experiences and memories behind our impact.
-                </p>
-
-            </div>
-
-            <div class="marquee" aria-label="Club photo slideshow">
-
-                <div
-                    class="marquee-track"
-                    id="gallery-track"
-                >
-                    <!-- Photo cards are inserted by script.js. -->
-                </div>
-
-            </div>
-
-            <p class="gallery-note">
-                Tap any photo to view the full image.
+            <p>
+              For private questions, feedback or website updates,
+              contact the admin by email.
             </p>
 
-        </section>
-
-
-        <!-- ==========================================
-             ABOUT OUR CLUB
-             ========================================== -->
-
-        <section class="about-section" id="about">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <span class="section-kicker">Who We Are</span>
-
-                    <h2>
-                        More Than a Club.
-                        <span class="pink-text">A Community.</span>
-                    </h2>
-
-                    <p>
-                        We bring students together through service,
-                        friendship and opportunities to grow as leaders.
-                    </p>
-
-                </div>
-
-                <div class="about-content">
-
-                    <div class="about-text">
-
-                        <h2>
-                            Growing Through
-                            <span>Service and Fellowship</span>
-                        </h2>
-
-                        <p>
-                            The Rotaract Club of Karatina University is a
-                            community where young people connect, learn,
-                            lead and work together to make a difference.
-                        </p>
-
-                        <p>
-                            Through community outreach, professional
-                            development, fellowship and service projects,
-                            we create opportunities for members to discover
-                            their potential while contributing to society.
-                        </p>
-
-                        <p>
-                            We believe that leadership is strengthened by
-                            service, friendships create lasting connections,
-                            and small actions can make a meaningful impact.
-                        </p>
-
-                        <a href="#events" class="btn btn-primary">
-                            See What We're Doing
-                        </a>
-
-                    </div>
-
-                    <div class="about-visual">
-
-                        <div class="about-visual-content">
-
-                            <div class="decorative-circle" aria-hidden="true">
-                                ✦
-                            </div>
-
-                            <h3>People of Action</h3>
-
-                            <p>
-                                Connecting people, creating opportunities
-                                and serving our community together.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CLUB VALUES -->
-
-                <div class="values-grid">
-
-                    <article class="value-card">
-
-                        <div class="value-icon" aria-hidden="true">
-                            ♡
-                        </div>
-
-                        <h3>Service</h3>
-
-                        <p>
-                            Taking action to support communities and
-                            contribute to positive change.
-                        </p>
-
-                    </article>
-
-
-                    <article class="value-card">
-
-                        <div class="value-icon" aria-hidden="true">
-                            ✦
-                        </div>
-
-                        <h3>Fellowship</h3>
-
-                        <p>
-                            Building genuine friendships, sharing
-                            experiences and growing together.
-                        </p>
-
-                    </article>
-
-
-                    <article class="value-card">
-
-                        <div class="value-icon" aria-hidden="true">
-                            ♛
-                        </div>
-
-                        <h3>Leadership</h3>
-
-                        <p>
-                            Developing confidence, responsibility and
-                            the skills to inspire meaningful action.
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==========================================
-             BOARD MEMBERS
-             ========================================== -->
-
-        <section class="board-section" id="board">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <span class="section-kicker">Meet Our Leaders</span>
-
-                    <h2>
-                        The People Behind
-                        <span class="pink-text">Our Club</span>
-                    </h2>
-
-                    <p>
-                        Meet the team working together to guide our
-                        activities, strengthen fellowship and support
-                        our club's mission.
-                    </p>
-
-                </div>
-
-
-                <div class="board-toggle-wrap">
-
-                    <button
-                        type="button"
-                        class="board-toggle"
-                        id="board-toggle"
-                        aria-expanded="false"
-                        aria-controls="board-content"
-                    >
-                        <span class="toggle-label">
-                            See Board Members
-                        </span>
-
-                        <span class="toggle-symbol" aria-hidden="true">
-                            +
-                        </span>
-
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="board-content"
-                    id="board-content"
-                    hidden
-                >
-
-                    <div
-                        class="board-grid"
-                        id="board-grid"
-                    >
-                        <!-- Board member cards are inserted by script.js. -->
-                    </div>
-
-                </div>
-
-
-       
-
-
-                            <p
-                                class="form-message"
-                                id="form-message"
-                                role="status"
-                                aria-live="polite"
-                            ></p>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==========================================
-             UPCOMING EVENTS
-             ========================================== -->
-
-        <section class="events-section" id="events">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <span class="section-kicker">Mark Your Calendar</span>
-
-                    <h2>
-                        Upcoming
-                        <span class="pink-text">Events</span>
-                    </h2>
-
-                    <p>
-                        Join us for experiences that bring people together,
-                        build friendships and create positive change.
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="events-container"
-                    id="events-container"
-                >
-                    <!-- Event cards are inserted by script.js. -->
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ==========================================
-             CALL TO ACTION
-             ========================================== -->
-
-        <section class="cta-section" id="contact">
-
-            <div class="cta-content">
-
-                <span class="section-kicker">
-                    Be Part of Something Meaningful
-                </span>
-
-                <h2>
-                    Your Journey Starts With One Connection.
-                </h2>
-
-                <p>
-                    Looking to build friendships, develop your leadership
-                    skills and make a difference? Connect with the
-                    Rotaract Club of Karatina University.
-                </p>
-
-                <div class="hero-actions">
-
-                    <!-- Replace the example URL with the club's real contact link. -->
-                    <a
-                        href="https://www.instagram.com/rac_karu/"
-                        class="btn btn-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Connect With Us
-                    </a>
-
-                    <a href="#home" class="btn btn-outline">
-                        Back to Top ↑
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
+            <p class="admin-email">youthmedia@zohomail.com</p>
+          </div>
+
+          <a
+            class="btn primary"
+            href="mailto:youthmedia@zohomail.com?subject=CTT%20Youth%20Media%20Private%20Chat"
+          >
+            Email Admin
+          </a>
+
+        </div>
+
+      </section>
 
     </main>
 
 
-    <!-- ==========================================
-         FULL IMAGE VIEWER
-         Clicking an image will open it at a larger size.
-         JavaScript will control the viewer.
-         ========================================== -->
+    <!-- FOOTER -->
+    <footer>
 
-    <div
-        class="image-lightbox"
-        id="image-lightbox"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Full-size image viewer"
-        aria-hidden="true"
-        hidden
-    >
+      <div>
+        <strong>CTT YOUTH MEDIA</strong>
+        <p>Built for the youth media team.</p>
+      </div>
 
-        <button
-            type="button"
-            class="lightbox-close"
-            id="lightbox-close"
-            aria-label="Close image viewer"
-        >
-            &times;
-        </button>
-
-        <button
-            type="button"
-            class="lightbox-backdrop"
-            id="lightbox-backdrop"
-            aria-label="Close full-size image"
-        ></button>
-
-        <div class="lightbox-content">
-
-            <img
-                id="lightbox-image"
-                src=""
-                alt=""
-            >
-
-            <p
-                id="lightbox-caption"
-                class="lightbox-caption"
-            ></p>
-
-        </div>
-
-    </div>
-
-
-    <!-- ==========================================
-         FOOTER
-         ========================================== -->
-
-    <footer class="footer">
-
-        <div class="footer-inner">
-
-            <div class="footer-brand">
-
-                <h3>Rotaract Club of Karatina University</h3>
-
-                <p>
-                    Service. Fellowship. Leadership.
-                    Together, we create opportunities and make a difference.
-                </p>
-
-            </div>
-
-
-            <nav class="footer-links" aria-label="Footer navigation">
-
-                <a href="#home">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#board">Our Board</a>
-                <a href="#events">Events</a>
-                <a href="#contact">Contact</a>
-
-            </nav>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <p>
-                &copy; <span id="current-year"></span>
-                Rotaract Club of Karatina University.
-                All rights reserved.
-            </p>
-
-            <p>
-                Last updated:
-                <span id="last-updated">Updating...</span>
-            </p>
-
-        </div>
+      <p>
+        Last updated by admin:
+        <span id="lastUpdated">2 November 2026</span>
+      </p>
 
     </footer>
 
+  </div>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+
+  <!-- JavaScript -->
+  <script src="script.js?v=5"></script>
 
 </body>
 </html>

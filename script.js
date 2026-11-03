@@ -43,15 +43,18 @@ function setLoginFace(expression) {
 
   loginFace.classList.remove("sad", "happy");
 
-  if (expression === "sad") {
-    faceEmoji.textContent = "😔";
-    loginFace.classList.add("sad");
-  } else if (expression === "happy") {
-    faceEmoji.textContent = "😎";
-    loginFace.classList.add("happy");
-  } else {
-    faceEmoji.textContent = "😊";
-  }
+  function setLoginFace(state) {
+    const face = document.getElementById("faceEmoji");
+
+    if (!face) return;
+
+    if (state === "happy") {
+        face.textContent = "😊";
+    } else if (state === "sad") {
+        face.textContent = "😔";
+    } else {
+        face.textContent = "😐";
+    }
 }
 
 function showLoginMessage(message) {

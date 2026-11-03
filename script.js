@@ -21,7 +21,8 @@ const allowedUsers = {
   florence: "Florence",
   precious: "Precious",
   ryan: "Ryan",
-  lewis: "Lewis"
+  lewis: "Lewis",
+Stephen:"Stephen",
 };
 
 const loginScreen = document.getElementById("loginScreen");

@@ -3,18 +3,78 @@
    Animated UI | Glassmorphism | Responsive
 ========================================== */
 
+/* =================================
+   CTT YOUTH MEDIA — CRIMSON THEME
+================================= */
+
 :root {
-  --bg: #080b16;
-  --surface: #11172a;
-  --surface-light: #19213a;
-  --text: #f4f7ff;
-  --muted: #a6b0ca;
-  --primary: #7c5cff;
-  --secondary: #00e0c6;
-  --accent: #ff5ca8;
-  --border: rgba(255, 255, 255, 0.1);
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  --radius: 22px;
+    color-scheme: dark;
+
+    --primary: #8b1728;
+    --primary-dark: #5c0d1a;
+    --primary-light: #b52b40;
+
+    --accent: #d84b60;
+    --accent-soft: #f1a0aa;
+
+    --bg: #100b0d;
+    --surface: #1b1115;
+    --surface-light: #26171c;
+
+    --text: #f8edf0;
+    --muted: #b9a4aa;
+    --border: rgba(216, 75, 96, 0.22);
+
+    --shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* LIGHT MODE */
+
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    --primary: #8b1728;
+    --primary-dark: #5c0d1a;
+    --primary-light: #b52b40;
+
+    --accent: #b52b40;
+    --accent-soft: #f6dce1;
+
+    --bg: #fff8f8;
+    --surface: #ffffff;
+    --surface-light: #f9e9ec;
+
+    --text: #28151a;
+    --muted: #765d64;
+    --border: rgba(139, 23, 40, 0.15);
+
+    --shadow: 0 12px 30px rgba(91, 13, 26, 0.09);
+}
+
+/* Apply the theme throughout the website */
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+section,
+header,
+nav,
+footer,
+.card,
+.event-card,
+.team-card,
+.chat-shell,
+.chat-header,
+.chat-messages,
+.chat-input {
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 * {

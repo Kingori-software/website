@@ -211,59 +211,43 @@ if (logoutButton) {
   }
 })();
 
-
-/* ==========================================
-   2. THEME SWITCHER
-========================================== */
+ /* =================================
+   DARK MODE / LIGHT MODE
+================================= */
 
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 
 function applyTheme(theme) {
-  const isLight = theme === "light";
+    document.documentElement.setAttribute("data-theme", theme);
 
-  document.body.classList.toggle("light-theme", isLight);
-
-  if (themeIcon) {
-    themeIcon.textContent = isLight ? "☀️" : "🌙";
-  }
-
-  if (themeToggle) {
-    themeToggle.setAttribute(
-      "aria-label",
-      isLight ? "Switch to dark theme" : "Switch to light theme"
-    );
-
-    themeToggle.setAttribute(
-      "title",
-      isLight ? "Switch to dark theme" : "Switch to light theme"
-    );
-  }
-
-  try {
     localStorage.setItem("ctt-theme", theme);
-  } catch (error) {
-    // Theme still works for this page view.
-  }
+
+    if (themeIcon) {
+        themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+    }
+
+    if (themeToggle) {
+        themeToggle.setAttribute(
+            "aria-label",
+            theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+        );
+    }
 }
 
-(function initializeTheme() {
-  let savedTheme = "dark";
+// Load the saved theme when the website opens
+const savedTheme = localStorage.getItem("ctt-theme") || "dark";
 
-  try {
-    savedTheme = localStorage.getItem("ctt-theme") || "dark";
-  } catch (error) {
-    // Use dark theme by default.
-  }
+applyTheme(savedTheme);
 
-  applyTheme(savedTheme);
-})();
-
+// Toggle between the two themes
 if (themeToggle) {
-  themeToggle.addEventListener("click", function () {
-    const isLight = document.body.classList.contains("light-theme");
-    applyTheme(isLight ? "dark" : "light");
-  });
+    themeToggle.addEventListener("click", () => {
+        const currentTheme =
+            document.documentElement.getAttribute("data-theme");
+
+        applyTheme(currentTheme === "dark" ? "light" : "dark");
+    });
 }
 
 

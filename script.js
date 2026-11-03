@@ -11,8 +11,6 @@
 ========================================== */
 
 // Names are deliberately NOT displayed on the login screen.
-// The user must type their name and password manually.
-
 const allowedUsers = {
   loftus: "Loftus",
   david: "David",
@@ -22,7 +20,7 @@ const allowedUsers = {
   precious: "Precious",
   ryan: "Ryan",
   lewis: "Lewis",
-Stephen:"Stephen",
+  stephen: "Stephen"
 };
 
 const loginScreen = document.getElementById("loginScreen");
@@ -39,41 +37,37 @@ const logoutButton = document.getElementById("logoutButton");
 
 let currentUser = null;
 
+// Control the emoji independently of the message.
 function setLoginFace(expression) {
-  if (!loginFace || !faceEmoji) return;
+  if (!faceEmoji) return;
 
-  loginFace.classList.remove("sad", "happy");
+  faceEmoji.textContent =
+    expression === "sad" ? "😔" :
+    expression === "happy" ? "😊" : "😐";
 
-  function setLoginFace(state) {
-    const face = document.getElementById("faceEmoji");
+  if (loginFace) {
+    loginFace.classList.remove("sad", "happy");
 
-    if (!face) return;
-
-    if (state === "happy") {
-        face.textContent = "😊";
-    } else if (state === "sad") {
-        face.textContent = "😔";
-    } else {
-        face.textContent = "😐";
+    if (expression === "sad" || expression === "happy") {
+      loginFace.classList.add(expression);
     }
-}
-
-function showLoginMessage(message) {
-  if (loginMessage) {
-    loginMessage.textContent = message;
   }
 }
 
+// Display the emoji BEFORE the login message.
+function showLoginMessage(message) {
+  if (!loginMessage) return;
+
+  loginMessage.textContent = message;
+  loginMessage.hidden = !message;
+}
+
+// Successful login.
 function showWebsite(name) {
   currentUser = name;
 
-  if (loginScreen) {
-    loginScreen.hidden = true;
-  }
-
-  if (websiteContent) {
-    websiteContent.hidden = false;
-  }
+  if (loginScreen) loginScreen.hidden = true;
+  if (websiteContent) websiteContent.hidden = false;
 
   if (welcomeMessage) {
     welcomeMessage.textContent = `Hello, ${name} 👋`;
@@ -83,31 +77,21 @@ function showWebsite(name) {
 
   document.title = `CTT Youth Media | ${name}`;
 
-  // Add the user's name to the current browser session.
-  // This does not store the password.
   try {
     sessionStorage.setItem("cttCurrentUser", name);
-  } catch (error) {
-    // The website can still work if session storage is unavailable.
-  }
+  } catch (error) {}
 
   initializeRevealAnimations();
 }
 
+// Return to login screen.
 function showLogin() {
   currentUser = null;
 
-  if (loginScreen) {
-    loginScreen.hidden = false;
-  }
+  if (loginScreen) loginScreen.hidden = false;
+  if (websiteContent) websiteContent.hidden = true;
 
-  if (websiteContent) {
-    websiteContent.hidden = true;
-  }
-
-  if (loginForm) {
-    loginForm.reset();
-  }
+  if (loginForm) loginForm.reset();
 
   showLoginMessage("");
   setLoginFace("normal");
@@ -116,15 +100,12 @@ function showLogin() {
 
   try {
     sessionStorage.removeItem("cttCurrentUser");
-  } catch (error) {
-    // No action needed.
-  }
+  } catch (error) {}
 
-  if (loginName) {
-    loginName.focus();
-  }
+  if (loginName) loginName.focus();
 }
 
+// Login validation.
 if (loginForm) {
   loginForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -143,7 +124,7 @@ if (loginForm) {
 
     if (!correctName) {
       setLoginFace("sad");
-      showLoginMessage("That name is not recognized. Please try again.");
+      showLoginMessage("Name not recognized. Please try again.");
       loginPassword.value = "";
       loginPassword.focus();
       return;
@@ -153,7 +134,7 @@ if (loginForm) {
 
     if (typedPassword !== expectedPassword) {
       setLoginFace("sad");
-      showLoginMessage("Incorrect password. Give it another try.");
+      showLoginMessage("Password incorrect. Please try again.");
       loginPassword.value = "";
       loginPassword.focus();
       return;
@@ -164,13 +145,14 @@ if (loginForm) {
   });
 }
 
-// Show/hide password button.
+// Show/hide password.
 if (togglePassword && loginPassword) {
   togglePassword.addEventListener("click", function () {
     const isHidden = loginPassword.type === "password";
 
     loginPassword.type = isHidden ? "text" : "password";
     togglePassword.textContent = isHidden ? "Hide" : "Show";
+
     togglePassword.setAttribute(
       "aria-label",
       isHidden ? "Hide password" : "Show password"
@@ -178,7 +160,7 @@ if (togglePassword && loginPassword) {
   });
 }
 
-// Make the face react when the user starts typing.
+// Reset the face when typing.
 if (loginName) {
   loginName.addEventListener("input", function () {
     setLoginFace("normal");
@@ -195,12 +177,10 @@ if (loginPassword) {
 
 // Logout.
 if (logoutButton) {
-  logoutButton.addEventListener("click", function () {
-    showLogin();
-  });
+  logoutButton.addEventListener("click", showLogin);
 }
 
-// Restore the signed-in name for the current browser session.
+// Restore existing browser session.
 (function restoreSession() {
   try {
     const savedUser = sessionStorage.getItem("cttCurrentUser");
@@ -214,6 +194,7 @@ if (logoutButton) {
     showLogin();
   }
 })();
+
 
  /* =================================
    DARK MODE / LIGHT MODE

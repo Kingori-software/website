@@ -1,152 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description" content="CTT Youth Media — Sunday services, upcoming events and media team.">
-  <meta name="theme-color" content="#090909">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CTT Youth Media — Sunday services, upcoming events and media team." />
   <title>CTT Youth Media</title>
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css" />
 </head>
+<body class="locked">
 
-<body>
+  <!-- ===== SCROLL PROGRESS ===== -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-  <!-- =========================
-       LOGIN SCREEN
-  ========================== -->
-  <section id="loginScreen" class="login-screen">
-
-    <div class="login-background">
-      <span class="glow glow-one"></span>
-      <span class="glow glow-two"></span>
-      <span class="glow glow-three"></span>
+  <!-- ============================================================ -->
+  <!-- ====================== LOGIN GATE ========================== -->
+  <!-- ============================================================ -->
+  <div class="login-gate" id="loginGate">
+    <div class="gate-bg" aria-hidden="true">
+      <span class="orb orb-1"></span>
+      <span class="orb orb-2"></span>
+      <span class="orb orb-3"></span>
+      <span class="grid-lines"></span>
     </div>
 
-    <div class="login-card">
-
+    <div class="login-card" id="loginCard">
       <div class="login-brand">
-        <div class="brand-mark">CTT</div>
-
-        <div class="brand-text">
+        <span class="brand-mark">CTT</span>
+        <span class="login-brand-text">
           <strong>CTT YOUTH</strong>
           <small>MEDIA</small>
-        </div>
+        </span>
       </div>
 
-      <div class="login-avatar" id="loginFace" aria-live="polite">
-        <span id="faceEmoji">😊</span>
+      <h1 class="login-title">Welcome back</h1>
+      <p class="login-sub">Sign in to enter the media hub</p>
+
+      <!-- Morphing face -->
+      <div class="face-wrap" id="faceWrap">
+        <svg class="face" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="face-ring" cx="50" cy="50" r="44" />
+          <circle class="face-bg"   cx="50" cy="50" r="44" />
+          <circle class="eye eye-l" cx="36" cy="42" r="5.5" />
+          <circle class="eye eye-r" cx="64" cy="42" r="5.5" />
+          <path class="mouth mouth-smile" d="M32 62 Q50 78 68 62" />
+          <path class="mouth mouth-sad"   d="M32 72 Q50 56 68 72" />
+        </svg>
       </div>
 
-      <p class="eyebrow">WELCOME BACK</p>
-
-      <h1 class="login-title">
-        Your space.<br>
-        <span>Your people.</span>
-      </h1>
-
-      <p class="login-description">
-        Sign in to access the CTT Youth Media website.
-      </p>
-
-      <form id="loginForm" class="login-form" autocomplete="on">
-
-        <div class="form-field">
-          <label for="loginName">Your name</label>
-
-          <input
-            id="loginName"
-            name="username"
-            type="text"
-            placeholder="Enter your name"
-            autocomplete="username"
-            autocapitalize="words"
-            maxlength="40"
-            required
-          >
+      <form id="loginForm" class="login-form" novalidate>
+        <div class="field">
+          <label for="loginName">Name</label>
+          <input id="loginName" type="text" placeholder="Enter your name"
+                 autocomplete="off" spellcheck="false" />
         </div>
 
-        <div class="form-field">
-          <label for="loginPassword">Password</label>
-
-          <div class="password-wrapper">
-            <input
-              id="loginPassword"
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              autocomplete="current-password"
-              required
-            >
-
-            <button
-              type="button"
-              id="togglePassword"
-              class="password-toggle"
-              aria-label="Show password"
-              aria-pressed="false"
-            >
-              👁️
-            </button>
+        <div class="field">
+          <label for="loginPass">Password</label>
+          <div class="pw-wrap">
+            <input id="loginPass" type="password" placeholder="Enter your password" autocomplete="off" />
+            <button type="button" class="eye-btn" id="togglePw" aria-label="Show password">👁</button>
           </div>
         </div>
 
-        <p
-          id="loginMessage"
-          class="login-message"
-          role="status"
-          aria-live="polite"
-        ></p>
+        <button type="submit" class="btn-login"><span>Enter Site</span></button>
 
-        <button type="submit" class="btn primary login-button">
-          <span>Enter CTT Media</span>
-          <span class="button-arrow" aria-hidden="true">→</span>
-        </button>
-
+        <p class="login-error" id="loginError" role="alert"></p>
+        <p class="login-hint">Password format: <b>name@123</b> &nbsp;·&nbsp; e.g. <b>Loftus@123</b></p>
       </form>
-
-      <div class="login-hint">
-        <span class="hint-icon">✦</span>
-        <p>Use your assigned name and password.</p>
-      </div>
-
-      <p class="login-footer">
-        CTT YOUTH MEDIA <span>•</span> SERVICE. CREATIVITY. COMMUNITY.
-      </p>
-
     </div>
-  </section>
 
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+  </div>
 
-  <!-- =========================
-       MAIN WEBSITE
-       Hidden until login succeeds
-  ========================== -->
-  <div id="websiteContent" hidden>
+  <!-- ============================================================ -->
+  <!-- =========================== SITE =========================== -->
+  <!-- ============================================================ -->
+  <div class="site" id="site" aria-hidden="true">
 
     <!-- HEADER -->
-    <header class="site-header" id="top">
-
-      <a href="#top" class="brand" aria-label="CTT Youth Media home">
-
+    <header class="site-header" id="siteHeader">
+      <a href="#top" class="brand">
         <span class="brand-mark">CTT</span>
-
         <span class="brand-text">
           <strong>CTT YOUTH</strong>
           <small>MEDIA</small>
         </span>
-
       </a>
 
-      <div class="welcome-user">
-        <span class="welcome-dot"></span>
-        <span id="welcomeMessage">Hello!</span>
-      </div>
-
-      <nav aria-label="Main navigation">
+      <nav>
         <a href="#day">Sunday</a>
         <a href="#events">Events</a>
         <a href="#media-team">Media Team</a>
@@ -154,270 +95,153 @@
         <a href="#admin">Admin</a>
       </nav>
 
-      <div class="header-actions">
-
-        <button
-          id="themeToggle"
-          class="theme-toggle"
-          type="button"
-          aria-label="Toggle theme"
-        >
+      <div class="header-right">
+        <div class="user-chip" id="userChip">
+          <span class="user-avatar" id="userAvatar">?</span>
+          <span class="user-hello">Hello, <b id="greetingName">Guest</b></span>
+        </div>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">
           <span id="themeIcon">🌑</span>
         </button>
-
-        <button
-          id="logoutButton"
-          class="logout-button"
-          type="button"
-        >
-          Log out
-        </button>
-
+        <button class="btn-logout" id="logoutBtn" type="button" title="Log out" aria-label="Log out">⏻</button>
       </div>
-
     </header>
 
-
     <!-- MAIN -->
-    <main>
+    <main id="top">
 
       <!-- HERO -->
       <section class="hero">
-
         <div class="hero-copy">
-
           <p class="eyebrow">CTT YOUTH MEDIA</p>
-
-          <h1>
-            Youth.<br>
-            <span>Media.</span>
-          </h1>
-
-          <p class="hero-text">
-            Stay connected with Sunday services, upcoming events
-            and the people serving through media.
-          </p>
-
+          <h1>Youth. <span>Media.</span></h1>
+          <p class="hero-text">Stay connected with Sunday services, upcoming events and the people serving through media.</p>
           <div class="hero-actions">
             <a href="#events" class="btn primary">View Events</a>
             <a href="#chat" class="btn secondary">Ask the Bot</a>
           </div>
-
         </div>
 
-        <div class="hero-card">
-
+        <div class="hero-card" data-tilt>
           <div class="live-status">
-            <span class="live-dot"></span>
-            THIS SUNDAY
+            <span class="live-dot"></span> THIS SUNDAY
           </div>
-
           <h3>Two Services</h3>
-
-          <div class="service-mini">
-            <b>08:30</b>
-            <span>Teens Service</span>
-          </div>
-
-          <div class="service-mini">
-            <b>11:30</b>
-            <span>Youth Service</span>
-          </div>
-
+          <div class="service-mini"><b>08:30</b><span>Teens Service</span></div>
+          <div class="service-mini"><b>11:30</b><span>Youth Service</span></div>
         </div>
-
       </section>
 
+      <!-- TICKER -->
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>SUNDAY 08:30 · TEENS SERVICE</span>
+          <span>SUNDAY 11:30 · YOUTH SERVICE</span>
+          <span>MEDIA TEAM SERVING</span>
+          <span>MISSIONS MONTH</span>
+          <span>STAY CONNECTED</span>
+          <span>SUNDAY 08:30 · TEENS SERVICE</span>
+          <span>SUNDAY 11:30 · YOUTH SERVICE</span>
+          <span>MEDIA TEAM SERVING</span>
+          <span>MISSIONS MONTH</span>
+          <span>STAY CONNECTED</span>
+        </div>
+      </div>
 
-      <!-- UPCOMING SUNDAY -->
+      <!-- SUNDAY -->
       <section id="day" class="section">
-
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <p class="eyebrow">UPCOMING</p>
           <h2>This Upcoming Sunday</h2>
         </div>
-
-        <article class="preacher-card sunday-card">
-
-          <div class="sunday-image-wrapper">
-            <img
-              src="https://i.ibb.co/9HNvNcDD/IMG-20260906-WA3666.jpg"
-              alt="CTT Youth Media upcoming Sunday"
-              loading="lazy"
-            >
+        <article class="preacher-card reveal" style="--d:.1s">
+          <div class="preacher-image-wrap">
+            <img src="https://i.ibb.co/9HNvNcDD/IMG-20260906-WA3666.jpg" alt="Upcoming Sunday" />
           </div>
-
         </article>
-
       </section>
-
 
       <!-- EVENTS -->
       <section id="events" class="section alt">
-
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <p class="eyebrow">DON'T MISS OUT</p>
           <h2>Upcoming Events</h2>
-          <p>Stay informed about what's happening at CTT.</p>
+          <p>Events are updated by <code>admin</code>.</p>
         </div>
-
         <div id="eventsGrid" class="cards-grid"></div>
-
       </section>
-
 
       <!-- MEDIA TEAM -->
       <section id="media-team" class="section">
-
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <p class="eyebrow">SERVING THIS SUNDAY</p>
           <h2>Media Team</h2>
-          <p>Meet the people serving through media this Sunday.</p>
+          <p>These are the people serving through media this Sunday.</p>
         </div>
 
-        <div class="team-service">
+        <h3 class="team-title reveal" style="--d:.05s">First Service (8:30am)</h3>
+        <div id="teamGridFirst" class="team-grid"></div>
 
-          <h3 class="team-service-title">
-            First Service <span>(8:30am)</span>
-          </h3>
-
-          <div id="teamGridFirst" class="team-grid"></div>
-
-        </div>
-
-        <div class="team-service">
-
-          <h3 class="team-service-title">
-            Second Service <span>(11:30am)</span>
-          </h3>
-
-          <div id="teamGridSecond" class="team-grid"></div>
-
-        </div>
-
+        <h3 class="team-title reveal" style="--d:.05s">Second Service (11:30am)</h3>
+        <div id="teamGridSecond" class="team-grid"></div>
       </section>
 
-
-      <!-- CHATBOT -->
+      <!-- BOT CHAT -->
       <section id="chat" class="section alt">
-
-        <div class="section-heading">
+        <div class="section-heading reveal">
           <p class="eyebrow">QUICK ANSWERS</p>
           <h2>CTT Youth Bot</h2>
           <p>Ask about service times, services or upcoming events.</p>
         </div>
 
-        <div class="chat-shell">
-
-          <div
-            id="chatMessages"
-            class="chat-messages"
-            aria-live="polite"
-            aria-label="Chat messages"
-          >
-
+        <div class="chat-shell reveal" style="--d:.1s">
+          <div id="chatMessages" class="chat-messages" aria-live="polite">
             <div class="message bot">
               <b>CTT Bot</b>
-              <span>
-                Hey! Ask me about service timings, the first service,
-                second service, or upcoming events.
-              </span>
+              <span>Hey! Ask me about service timings, the first service, second service, or upcoming events.</span>
             </div>
-
           </div>
 
           <div class="quick-questions">
-
-            <button type="button" data-question="What are the service timings?">
-              Service timings?
-            </button>
-
-            <button type="button" data-question="What service is the first service?">
-              First service?
-            </button>
-
-            <button type="button" data-question="What service is the second service?">
-              Second service?
-            </button>
-
-            <button type="button" data-question="What are the upcoming events?">
-              Upcoming events?
-            </button>
-
+            <button data-question="What are the service timings?">Service timings?</button>
+            <button data-question="What service is the first service?">First service?</button>
+            <button data-question="What service is the second Service?">Second service?</button>
+            <button data-question="What are the upcoming events?">Upcoming events?</button>
           </div>
 
           <form id="chatForm" class="chat-input">
-
-            <input
-              id="chatInput"
-              type="text"
-              autocomplete="off"
-              placeholder="Ask CTT Bot..."
-              aria-label="Ask CTT Bot"
-              required
-            >
-
+            <input id="chatInput" type="text" autocomplete="off" placeholder="Ask CTT Bot..." aria-label="Ask CTT Bot" />
             <button class="btn primary" type="submit">Send</button>
-
           </form>
-
         </div>
-
       </section>
 
-
-      <!-- ADMIN CONTACT -->
+      <!-- ADMIN -->
       <section id="admin" class="section admin-section">
-
-        <div class="admin-card">
-
-          <div>
-            <p class="eyebrow">NEED HELP?</p>
-
-            <h2>Private chat with the admin</h2>
-
-            <p>
-              For private questions, feedback or website updates,
-              contact the admin by email.
-            </p>
-
-            <p class="admin-email">youthmedia@zohomail.com</p>
-          </div>
-
-          <a
-            class="btn primary"
-            href="mailto:youthmedia@zohomail.com?subject=CTT%20Youth%20Media%20Private%20Chat"
-          >
-            Email Admin
-          </a>
-
+        <div class="admin-card reveal">
+          <p class="eyebrow">NEED HELP?</p>
+          <h2>Private chat with the admin</h2>
+          <p>For private questions, feedback or website updates, contact the admin by email.</p>
+          <p class="admin-email">youthmedia@zohomail.com</p>
+          <a class="btn primary" href="mailto:youthmedia@zohomail.com?subject=CTT%20Youth%20Media%20Private%20Chat">Email Admin</a>
         </div>
-
       </section>
 
     </main>
 
-
     <!-- FOOTER -->
     <footer>
-
       <div>
         <strong>CTT YOUTH MEDIA</strong>
         <p>Built for the youth media team.</p>
       </div>
-
-      <p>
-        Last updated by admin:
-        <span id="lastUpdated">2 November 2026</span>
-      </p>
-
+      <p>Last updated by admin: <span id="lastUpdated">—</span></p>
     </footer>
 
   </div>
 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <!-- JavaScript -->
-  <script src="script.js?v=5"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>

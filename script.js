@@ -1,662 +1,437 @@
-/* ==========================================
-   CTT YOUTH MEDIA — WEBSITE ENGINE
-   Login | Events | Media Team | Chatbot
-   Theme | Animations | Personal Greeting
-========================================== */
-
-"use strict";
-
-/* ==========================================
-   1. LOGIN SYSTEM
-========================================== */
-
-// Names are deliberately NOT displayed on the login screen.
-const allowedUsers = {
-  loftus: "Loftus",
-  david: "David",
-  mark: "Mark",
-  praise: "Praise",
-  florence: "Florence",
-  precious: "Precious",
-  ryan: "Ryan",
-  lewis: "Lewis",
-  stephen: "Stephen"
-};
-
-const loginScreen = document.getElementById("loginScreen");
-const loginForm = document.getElementById("loginForm");
-const loginName = document.getElementById("loginName");
-const loginPassword = document.getElementById("loginPassword");
-const loginFace = document.getElementById("loginFace");
-const faceEmoji = document.getElementById("faceEmoji");
-const loginMessage = document.getElementById("loginMessage");
-const togglePassword = document.getElementById("togglePassword");
-const websiteContent = document.getElementById("websiteContent");
-const welcomeMessage = document.getElementById("welcomeMessage");
-const logoutButton = document.getElementById("logoutButton");
-
-let currentUser = null;
-
-// Control the emoji independently of the message.
-function setLoginFace(expression) {
-  if (!faceEmoji) return;
-
-  faceEmoji.textContent =
-    expression === "sad" ? "😔" :
-    expression === "happy" ? "😊" : "😐";
-
-  if (loginFace) {
-    loginFace.classList.remove("sad", "happy");
-
-    if (expression === "sad" || expression === "happy") {
-      loginFace.classList.add(expression);
-    }
-  }
-}
-
-// Display the emoji BEFORE the login message.
-function showLoginMessage(message) {
-  if (!loginMessage) return;
-
-  loginMessage.textContent = message;
-  loginMessage.hidden = !message;
-}
-
-// Successful login.
-function showWebsite(name) {
-  currentUser = name;
-
-  if (loginScreen) loginScreen.hidden = true;
-  if (websiteContent) websiteContent.hidden = false;
-
-  if (welcomeMessage) {
-    welcomeMessage.textContent = `Hello, ${name} 👋`;
-  }
-
-  setLoginFace("happy");
-
-  document.title = `CTT Youth Media | ${name}`;
-
-  try {
-    sessionStorage.setItem("cttCurrentUser", name);
-  } catch (error) {}
-
-  initializeRevealAnimations();
-}
-
-// Return to login screen.
-function showLogin() {
-  currentUser = null;
-
-  if (loginScreen) loginScreen.hidden = false;
-  if (websiteContent) websiteContent.hidden = true;
-
-  if (loginForm) loginForm.reset();
-
-  showLoginMessage("");
-  setLoginFace("normal");
-
-  document.title = "CTT Youth Media";
-
-  try {
-    sessionStorage.removeItem("cttCurrentUser");
-  } catch (error) {}
-
-  if (loginName) loginName.focus();
-}
-
-// Login validation.
-if (loginForm) {
-  loginForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const typedName = loginName.value.trim();
-    const typedPassword = loginPassword.value;
-
-    const normalizedName = typedName.toLowerCase();
-    const correctName = allowedUsers[normalizedName];
-
-    if (!typedName || !typedPassword) {
-      setLoginFace("sad");
-      showLoginMessage("Please enter your name and password.");
-      return;
-    }
-
-    if (!correctName) {
-      setLoginFace("sad");
-      showLoginMessage("Name not recognized. Please try again.");
-      loginPassword.value = "";
-      loginPassword.focus();
-      return;
-    }
-
-    const expectedPassword = `${correctName}@123`;
-
-    if (typedPassword !== expectedPassword) {
-      setLoginFace("sad");
-      showLoginMessage("Password incorrect. Please try again.");
-      loginPassword.value = "";
-      loginPassword.focus();
-      return;
-    }
-
-    showLoginMessage("");
-    showWebsite(correctName);
-  });
-}
-
-// Show/hide password.
-if (togglePassword && loginPassword) {
-  togglePassword.addEventListener("click", function () {
-    const isHidden = loginPassword.type === "password";
-
-    loginPassword.type = isHidden ? "text" : "password";
-    togglePassword.textContent = isHidden ? "Hide" : "Show";
-
-    togglePassword.setAttribute(
-      "aria-label",
-      isHidden ? "Hide password" : "Show password"
-    );
-  });
-}
-
-// Reset the face when typing.
-if (loginName) {
-  loginName.addEventListener("input", function () {
-    setLoginFace("normal");
-    showLoginMessage("");
-  });
-}
-
-if (loginPassword) {
-  loginPassword.addEventListener("input", function () {
-    setLoginFace("normal");
-    showLoginMessage("");
-  });
-}
-
-// Logout.
-if (logoutButton) {
-  logoutButton.addEventListener("click", showLogin);
-}
-
-// Restore existing browser session.
-(function restoreSession() {
-  try {
-    const savedUser = sessionStorage.getItem("cttCurrentUser");
-
-    if (savedUser && Object.values(allowedUsers).includes(savedUser)) {
-      showWebsite(savedUser);
-    } else {
-      showLogin();
-    }
-  } catch (error) {
-    showLogin();
-  }
-})();
-
-
- /* =================================
-   DARK MODE / LIGHT MODE
-================================= */
-
-const themeToggle = document.getElementById("themeToggle");
-const themeIcon = document.getElementById("themeIcon");
-
-function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-
-    localStorage.setItem("ctt-theme", theme);
-
-    if (themeIcon) {
-        themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
-    }
-
-    if (themeToggle) {
-        themeToggle.setAttribute(
-            "aria-label",
-            theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
-        );
-    }
-}
-
-// Load the saved theme when the website opens
-const savedTheme = localStorage.getItem("ctt-theme") || "dark";
-
-applyTheme(savedTheme);
-
-// Toggle between the two themes
-if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-        const currentTheme =
-            document.documentElement.getAttribute("data-theme");
-
-        applyTheme(currentTheme === "dark" ? "light" : "dark");
-    });
-}
-
-
-/* ==========================================
-   3. UPCOMING EVENTS
-========================================== */
-
-const events = [
-  {
-    title: "Missions Month",
-    description:
-      "A special opportunity to grow in faith, serve others, and participate in our church's mission activities.",
-    icon: "🙏",
-    date: "Missions Month",
-    time: "See announcements"
-  },
-  {
-    title: "Sunday Service",
-    description:
-      "Join the CTT Youth community for worship, fellowship, teaching, and spiritual growth.",
-    icon: "✨",
-    date: "Sunday",
-    time: "Join us for service"
-  }
-];
-
-const eventsGrid = document.getElementById("eventsGrid");
-
-function renderEvents() {
-  if (!eventsGrid) return;
-
-  eventsGrid.innerHTML = events.map(function (event) {
-    return `
-      <article class="event-card reveal">
-        <div class="event-icon" aria-hidden="true">
-          ${event.icon}
-        </div>
-
-        <h3>${event.title}</h3>
-
-        <p>${event.description}</p>
-
-        <div class="event-meta">
-          <span>📅 ${event.date}</span>
-          <span>🕒 ${event.time}</span>
-        </div>
-      </article>
-    `;
-  }).join("");
-
-  initializeRevealAnimations();
-}
-
-renderEvents();
-
-
-/* ==========================================
-   4. MEDIA TEAM MEMBERS
-========================================== */
-
-// Update these arrays with the correct names, roles,
-// and photo URLs for your actual media team.
-
-const firstTeam = [
-  {
-    name: "Lewis",
-    role: "Sound",
-    image: ""
-  },
-  {
-    name: "Faith",
-    role: "Projection",
-    image: ""
-  },
-  {
-    name: "Ryan",
-    role: "Photography",
-    image: ""
-  },
-  {
-    name: "Team Member",
-    role: "Cable and Stage Management",
-    image: ""
-  },
-  {
-    name: "Team Member",
-    role: "Note Taking",
-    image: ""
-  }
-];
-
-const secondTeam = [
-  {
-    name: "Lewis",
-    role: "Sound",
-    image: ""
-  },
-  {
-    name: "Faith",
-    role: "Projections",
-    image: ""
-  },
-  {
-    name: "Team Member",
-    role: "Socials",
-    image: ""
-  },
-  {
-    name: "Ryan",
-    role: "Photography",
-    image: ""
-  },
-  {
-    name: "David",
-    role: "Cable and Stage Management",
-    image: ""
-  }
-];
-
-const teamGridFirst = document.getElementById("teamGridFirst");
-const teamGridSecond = document.getElementById("teamGridSecond");
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, function (character) {
-    const entities = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    };
-
-    return entities[character];
-  });
-}
-
-function createTeamCard(member) {
-  const name = escapeHTML(member.name);
-  const role = escapeHTML(member.role);
-  const initials = escapeHTML(
-    member.name
-      .split(/\s+/)
-      .filter(Boolean)
-      .map(function (part) {
-        return part.charAt(0);
-      })
-      .join("")
-      .slice(0, 2)
-      .toUpperCase()
-  );
-
-  const avatar = member.image
-    ? `<div class="team-avatar">
-         <img src="${escapeHTML(member.image)}"
-              alt="${name}"
-              loading="lazy">
-       </div>`
-    : `<div class="team-avatar" aria-label="${name}">
-         ${initials}
-       </div>`;
-
-  return `
-    <article class="team-card reveal">
-      ${avatar}
-      <h3>${name}</h3>
-      <p>${role}</p>
-    </article>
-  `;
-}
-
-function renderTeam() {
-  if (teamGridFirst) {
-    teamGridFirst.innerHTML = firstTeam
-      .map(createTeamCard)
-      .join("");
-  }
-
-  if (teamGridSecond) {
-    teamGridSecond.innerHTML = secondTeam
-      .map(createTeamCard)
-      .join("");
-  }
-
-  initializeRevealAnimations();
-}
-
-renderTeam();
-
-
-/* ==========================================
-   5. YOUTH MEDIA CHATBOT
-========================================== */
-
-const chatMessages = document.getElementById("chatMessages");
-const chatForm = document.getElementById("chatForm");
-const chatInput = document.getElementById("chatInput");
-
-const chatbotAnswers = [
-  {
-    keywords: ["hello", "hi", "hey", "greetings"],
-    answer:
-      "Hey there! 👋 Welcome to CTT Youth Media. What would you like to know?"
-  },
-  {
-    keywords: ["service", "services", "church", "sunday"],
-    answer:
-      "We gather for Sunday services, worship, fellowship, and spiritual growth. Check our announcements for the latest service details. 🙏"
-  },
-  {
-    keywords: ["first service", "morning service"],
-    answer:
-      "For the latest first-service time, please check the church's official announcements or contact the media team."
-  },
-  {
-    keywords: ["second service", "afternoon service"],
-    answer:
-      "For the latest second-service time, please check the church's official announcements or contact the media team."
-  },
-  {
-    keywords: ["event", "events", "upcoming", "calendar"],
-    answer:
-      "You can find our listed activities in the Upcoming Events section of this website. Keep checking announcements for updates! 📅"
-  },
-  {
-    keywords: ["media", "team", "members", "photography", "sound"],
-    answer:
-      "Our media team supports church services through sound, projection, photography, social media, and stage support. Check the Media Team section to meet the team."
-  },
-  {
-    keywords: ["missions", "mission"],
-    answer:
-      "Missions Month is an opportunity to serve, grow spiritually, and take part in mission activities. Please check the latest announcements for specific plans."
-  },
-  {
-    keywords: ["contact", "email", "admin", "reach"],
-    answer:
-      "You can contact the CTT Youth Media administrator through the email address listed in the Contact section below."
-  },
-  {
-    keywords: ["thank", "thanks", "thank you"],
-    answer:
-      "You're very welcome! 😊 We're glad to help. Have a blessed day!"
-  },
-  {
-    keywords: ["bye", "goodbye", "see you"],
-    answer:
-      "See you soon! 👋 Thanks for visiting CTT Youth Media."
-  }
-];
-
-function addChatMessage(message, sender) {
-  if (!chatMessages) return;
-
-  const bubble = document.createElement("div");
-
-  bubble.className =
-    sender === "user" ? "chat-message user" : "chat-message";
-
-  bubble.textContent = message;
-
-  chatMessages.appendChild(bubble);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function getChatbotAnswer(message) {
-  const normalizedMessage = message.toLowerCase().trim();
-
-  for (const item of chatbotAnswers) {
-    const matched = item.keywords.some(function (keyword) {
-      return normalizedMessage.includes(keyword);
-    });
-
-    if (matched) {
-      return item.answer;
-    }
-  }
-
-  return (
-    "Thanks for your question! 😊 I may not have that information yet. " +
-    "Please check the website announcements or contact the CTT Youth Media team."
-  );
-}
-
-function sendChatMessage(message) {
-  const cleanMessage = message.trim();
-
-  if (!cleanMessage) return;
-
-  addChatMessage(cleanMessage, "user");
-
-  const answer = getChatbotAnswer(cleanMessage);
-
-  // Small delay makes the reply feel more conversational.
-  window.setTimeout(function () {
-    addChatMessage(answer, "bot");
-  }, 350);
-}
-
-if (chatForm && chatInput) {
-  chatForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const message = chatInput.value;
-    if (!message.trim()) return;
-
-    chatInput.value = "";
-    sendChatMessage(message);
-    chatInput.focus();
-  });
-}
-
-// Quick-question buttons should use data-question="your question".
-document.querySelectorAll("[data-question]").forEach(function (button) {
-  button.addEventListener("click", function () {
-    const question = button.getAttribute("data-question");
-
-    if (question) {
-      sendChatMessage(question);
-    }
-  });
-});
-
-// Initial chatbot greeting.
-if (chatMessages && chatMessages.children.length === 0) {
-  addChatMessage(
-    "Hey! 👋 Welcome to CTT Youth Media. Ask me about services, events, or our media team.",
-    "bot"
-  );
-}
-
-
-/* ==========================================
-   6. LAST UPDATED DATE
-========================================== */
-
-const lastUpdated = document.getElementById("lastUpdated");
-
-if (lastUpdated) {
-  lastUpdated.textContent = new Date().toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
-}
-
-
-/* ==========================================
-   7. SCROLL REVEAL ANIMATIONS
-========================================== */
-
-let revealObserver = null;
-
-function initializeRevealAnimations() {
-  const revealElements = document.querySelectorAll(
-    ".reveal:not(.visible)"
-  );
-
-  if (!("IntersectionObserver" in window)) {
-    revealElements.forEach(function (element) {
-      element.classList.add("visible");
-    });
-
-    return;
-  }
-
-  if (revealObserver) {
-    revealElements.forEach(function (element) {
-      revealObserver.observe(element);
-    });
-
-    return;
-  }
-
-  revealObserver = new IntersectionObserver(
-    function (entries, observer) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
+/* ============================================================
+   CTT YOUTH MEDIA — v10 SCRIPT
+   ============================================================ */
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------
+     CONFIG
+  ------------------------------------------------------------ */
+  const USERS = ["Loftus", "David", "Mark", "Praise", "Florence", "Precious", "Ryan", "Lewis"];
+  const STORAGE_KEY = "ctt-user";
+
+  /* ------------------------------------------------------------
+     DOM
+  ------------------------------------------------------------ */
+  const body         = document.body;
+  const loginGate    = document.getElementById("loginGate");
+  const loginCard    = document.getElementById("loginCard");
+  const loginForm    = document.getElementById("loginForm");
+  const loginName    = document.getElementById("loginName");
+  const loginPass    = document.getElementById("loginPass");
+  const loginError   = document.getElementById("loginError");
+  const faceWrap     = document.getElementById("faceWrap");
+  const togglePw     = document.getElementById("togglePw");
+  const confettiLayer= document.getElementById("confettiLayer");
+
+  const site         = document.getElementById("site");
+  const siteHeader   = document.getElementById("siteHeader");
+  const greetingName = document.getElementById("greetingName");
+  const userAvatar   = document.getElementById("userAvatar");
+  const logoutBtn    = document.getElementById("logoutBtn");
+  const scrollProgress = document.getElementById("scrollProgress");
+  const themeToggle  = document.getElementById("themeToggle");
+  const themeIcon    = document.getElementById("themeIcon");
+  const toastEl      = document.getElementById("toast");
+
+  /* ------------------------------------------------------------
+     DATA
+  ------------------------------------------------------------ */
+  const events = [
+    {
+      title: "Missions Month",
+      date: "September",
+      description: "Missions.",
+      image: "https://i.ibb.co/d0SQskDQ/IMG-20260906-WA7380.jpg"
     },
     {
-      threshold: 0.12
+      title: "Sunday",
+      date: "September",
+      description: "Church.",
+      image: "https://i.ibb.co/dJrgqtkN/FSai5-UPXIAE0g-Y6.jpg"
     }
-  );
+  ];
 
-  revealElements.forEach(function (element) {
-    revealObserver.observe(element);
-  });
-}
+  const firstTeam = [
+    { name: "Lewis", role: "Sound" },
+    { name: "Faith", role: "Projection" },
+    { name: "Ryan",  role: "Photography" },
+    { name: "...",   role: "Cable and Stage Management" },
+    { name: "Note taking", role: "Note taking" }
+  ];
 
-document.addEventListener("DOMContentLoaded", function () {
-  initializeRevealAnimations();
-});
+  const secondTeam = [
+    { name: "Lewis", role: "Sound" },
+    { name: "Faith", role: "Projections" },
+    { name: "...",   role: "Socials" },
+    { name: "Ryan",  role: "Photography" },
+    { name: "David", role: "Cable and Stage management" }
+  ];
 
+  const answers = [
+    {
+      keys: ["service timing", "service times", "timing", "timings", "time"],
+      answer: "The 1st Service is from 8:30am to 10:30am. The 2nd Service is from 11:30am to 1:30pm."
+    },
+    {
+      keys: ["first service", "1st service"],
+      answer: "The first service is the Teens Service, from 8:30am to 10:30am."
+    },
+    {
+      keys: ["second service", "2nd service"],
+      answer: "The second service is the Youth Service, from 11:30am to 1:30pm."
+    },
+    {
+      keys: ["upcoming event", "upcoming events", "events"],
+      answer: "Kindly scroll through to the Upcoming Events section and you'll check them there."
+    }
+  ];
 
-/* ==========================================
-   8. IMAGE FALLBACKS
-========================================== */
-
-// If a team photo URL fails, show the member's initials
-// rather than leaving a broken image on the website.
-
-document.addEventListener("error", function (event) {
-  const target = event.target;
-
-  if (target instanceof HTMLImageElement) {
-    target.style.opacity = "0.35";
-    target.alt = target.alt || "Image unavailable";
+  /* ------------------------------------------------------------
+     LOGIN HELPERS
+  ------------------------------------------------------------ */
+  function findUser(name) {
+    const needle = (name || "").trim().toLowerCase();
+    return USERS.find(u => u.toLowerCase() === needle) || null;
   }
-}, true);
 
+  function isValid(name, pass) {
+    const user = findUser(name);
+    if (!user) return false;
+    return (pass || "").trim().toLowerCase() === (user.toLowerCase() + "@123");
+  }
 
-/* ==========================================
-   9. CONSOLE MESSAGE
-========================================== */
+  function setFace(sad) {
+    faceWrap.classList.toggle("sad", sad);
+  }
 
-console.log(
-  "%cCTT YOUTH MEDIA",
-  "font-size:20px;font-weight:bold;color:#7c5cff;"
-);
+  function showError(msg) {
+    loginError.textContent = msg;
+    loginError.classList.add("show");
+    loginCard.classList.remove("shake");
+    void loginCard.offsetWidth; // restart animation
+    loginCard.classList.add("shake");
+  }
 
-console.log(
-  "%cServing through creativity, connection, and media.",
-  "font-size:12px;color:#00bfae;"
-);
+  function clearError() {
+    loginError.textContent = "";
+    loginError.classList.remove("show");
+  }
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toastEl.classList.remove("show"), 2400);
+  }
+
+  /* ------------------------------------------------------------
+     FACE INPUT HANDLERS
+  ------------------------------------------------------------ */
+  loginName.addEventListener("input", () => { setFace(false); clearError(); });
+  loginPass.addEventListener("input", () => { setFace(false); clearError(); });
+
+  togglePw.addEventListener("click", () => {
+    const hidden = loginPass.type === "password";
+    loginPass.type = hidden ? "text" : "password";
+    togglePw.textContent = hidden ? "🙈" : "👁";
+  });
+
+  /* ------------------------------------------------------------
+     CONFETTI
+  ------------------------------------------------------------ */
+  function burstConfetti() {
+    const colors = ["#e03131", "#ff8787", "#ffd43b", "#ffffff", "#8f1111", "#ffa94d"];
+    for (let i = 0; i < 80; i++) {
+      const p = document.createElement("i");
+      p.className = "confetti";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDuration = (1.6 + Math.random() * 1.6) + "s";
+      p.style.animationDelay = (Math.random() * 0.4) + "s";
+      const w = 6 + Math.random() * 8;
+      p.style.width = w + "px";
+      p.style.height = (w * 1.6) + "px";
+      p.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+      confettiLayer.appendChild(p);
+      setTimeout(() => p.remove(), 4000);
+    }
+  }
+
+  /* ------------------------------------------------------------
+     LOGIN SUBMIT
+  ------------------------------------------------------------ */
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    clearError();
+
+    const name = loginName.value.trim();
+    const pass = loginPass.value;
+
+    if (!name || !pass) {
+      setFace(true);
+      showError("Please fill in both your name and password.");
+      return;
+    }
+
+    if (!isValid(name, pass)) {
+      setFace(true);
+      showError("Wrong name or password. Try again.");
+      loginPass.value = "";
+      loginPass.focus();
+      return;
+    }
+
+    // success
+    const user   = findUser(name);
+    const pretty = user.charAt(0).toUpperCase() + user.slice(1).toLowerCase();
+
+    setFace(false);
+    faceWrap.classList.add("happy");
+    burstConfetti();
+
+    setTimeout(() => enterSite(pretty, false), 560);
+  });
+
+  /* ------------------------------------------------------------
+     ENTER / EXIT SITE
+  ------------------------------------------------------------ */
+  let siteReady = false;
+
+  function enterSite(name, instant) {
+    localStorage.setItem(STORAGE_KEY, name);
+
+    greetingName.textContent = name;
+    userAvatar.textContent   = name.charAt(0).toUpperCase();
+
+    site.classList.add("site-in");
+    site.setAttribute("aria-hidden", "false");
+    body.classList.remove("locked");
+
+    if (instant) {
+      loginGate.style.display = "none";
+    } else {
+      loginGate.classList.add("gate-out");
+      setTimeout(() => { loginGate.style.display = "none"; }, 700);
+    }
+
+    if (!siteReady) {
+      siteReady = true;
+      initSite();
+    }
+  }
+
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+
+  /* ------------------------------------------------------------
+     RENDER: EVENTS
+  ------------------------------------------------------------ */
+  const eventsGrid = document.getElementById("eventsGrid");
+
+  function renderEvents() {
+    eventsGrid.innerHTML = events.map((event, i) => {
+      const imageLink = event.image;
+      const titleLink = event.url || null;
+
+      return `
+        <article class="event-card reveal" style="--d:${(i * 0.08).toFixed(2)}s">
+          <a href="${imageLink}" target="_blank" rel="noopener noreferrer">
+            <img src="${event.image}" alt="${event.title}" loading="lazy" />
+          </a>
+          <div class="event-body">
+            <div class="event-date">${event.date}</div>
+            ${titleLink
+              ? `<h3><a href="${titleLink}" target="_blank" rel="noopener noreferrer">${event.title}</a></h3>`
+              : `<h3>${event.title}</h3>`}
+            <p>${event.description}</p>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  /* ------------------------------------------------------------
+     RENDER: TEAM
+  ------------------------------------------------------------ */
+  function initials(name) {
+    const clean = (name || "").trim();
+    if (!clean || /^\.+$/.test(clean)) return "★";
+    return clean.split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  }
+
+  function renderTeam() {
+    const gridFirst  = document.getElementById("teamGridFirst");
+    const gridSecond = document.getElementById("teamGridSecond");
+
+    function renderGrid(grid, team) {
+      grid.innerHTML = team.map((person, i) => `
+        <article class="team-card reveal" style="--d:${(i * 0.06).toFixed(2)}s">
+          <div class="team-avatar">${initials(person.name)}</div>
+          <h3>${person.name}</h3>
+          <p>${person.role}</p>
+        </article>
+      `).join("");
+    }
+
+    renderGrid(gridFirst,  firstTeam);
+    renderGrid(gridSecond, secondTeam);
+  }
+
+  /* ------------------------------------------------------------
+     BOT CHAT
+  ------------------------------------------------------------ */
+  const chatMessages = document.getElementById("chatMessages");
+  const chatForm     = document.getElementById("chatForm");
+  const chatInput    = document.getElementById("chatInput");
+
+  function botAnswer(question) {
+    const q = question.toLowerCase().trim();
+    const match = answers.find(item => item.keys.some(key => q.includes(key)));
+    if (match) return match.answer;
+    return "I can help with service timings, the first service, the second service, and upcoming events. Try asking me one of those.";
+  }
+
+  function addMessage(text, type) {
+    const div = document.createElement("div");
+    div.className = `message ${type}`;
+    div.innerHTML = `<b>${type === "bot" ? "CTT Bot" : "You"}</b><span>${text}</span>`;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function ask(question) {
+    addMessage(question, "user");
+    setTimeout(() => addMessage(botAnswer(question), "bot"), 300);
+  }
+
+  function setupChat() {
+    chatForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = chatInput.value.trim();
+      if (!q) return;
+      ask(q);
+      chatInput.value = "";
+    });
+
+    document.querySelectorAll(".quick-questions button").forEach(btn => {
+      btn.addEventListener("click", () => ask(btn.dataset.question));
+    });
+  }
+
+  /* ------------------------------------------------------------
+     THEME
+  ------------------------------------------------------------ */
+  function getTheme() {
+    return document.documentElement.dataset.theme || "light";
+  }
+
+  function setTheme(theme) {
+    if (theme === "dark") {
+      document.documentElement.dataset.theme = "dark";
+      localStorage.setItem("ctt-theme", "dark");
+    } else {
+      delete document.documentElement.dataset.theme;
+      localStorage.setItem("ctt-theme", "light");
+    }
+    updateThemeIcon();
+  }
+
+  function updateThemeIcon() {
+    themeIcon.textContent = getTheme() === "dark" ? "☀️" : "🌑";
+  }
+
+  function setupTheme() {
+    const saved = localStorage.getItem("ctt-theme");
+    setTheme(saved === "dark" ? "dark" : "light");
+
+    themeToggle.addEventListener("click", () => {
+      setTheme(getTheme() === "dark" ? "light" : "dark");
+    });
+  }
+
+  /* ------------------------------------------------------------
+     TILT (hero card)
+  ------------------------------------------------------------ */
+  function setupTilt() {
+    document.querySelectorAll("[data-tilt]").forEach(card => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.transform =
+          `perspective(900px) rotateX(${(-y * 8).toFixed(2)}deg) ` +
+          `rotateY(${(x * 8).toFixed(2)}deg) translateY(-6px)`;
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------
+     SCROLL FX (progress bar + sticky header)
+  ------------------------------------------------------------ */
+  function setupScrollFx() {
+    const onScroll = () => {
+      const h   = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      scrollProgress.style.width = pct + "%";
+      siteHeader.classList.toggle("scrolled", h.scrollTop > 20);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ------------------------------------------------------------
+     SCROLL REVEALS
+  ------------------------------------------------------------ */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+  function observeReveals() {
+    document.querySelectorAll(".reveal:not(.in)").forEach(el => {
+      revealObserver.observe(el);
+    });
+  }
+
+  /* ------------------------------------------------------------
+     INIT SITE
+  ------------------------------------------------------------ */
+  function initSite() {
+    renderEvents();
+    renderTeam();
+    setupChat();
+    setupTilt();
+    observeReveals();
+
+    document.getElementById("lastUpdated").textContent =
+      new Date().toLocaleDateString("en-GB", {
+        day: "numeric", month: "long", year: "numeric"
+      });
+  }
+
+  /* ------------------------------------------------------------
+     BOOT
+  ------------------------------------------------------------ */
+  setupTheme();       // theme persists even before login
+  setupScrollFx();
+
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored && findUser(stored)) {
+    enterSite(stored, true);
+  } else {
+    // stay on login gate
+    setTimeout(() => loginName.focus(), 400);
+  }
+
+})();
